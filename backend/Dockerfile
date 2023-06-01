@@ -1,17 +1,14 @@
-FROM python:3.8-alpine
+FROM python:3
 
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONBUFFERED=1
 
-WORKDIR /app/backend
+WORKDIR /app/backend/
 
 COPY requirements.txt /app/backend/
 
-# Build psycopg2-binary from source -- add required required dependencies
-RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl-dev && \
-        pip install --no-cache-dir -r requirements.txt && \
-        apk --purge del .build-deps
+RUN pip3 install -r requirements.txt
 
 COPY . /app/backend/
 
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+

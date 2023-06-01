@@ -1,34 +1,54 @@
-version: "3.9"
+version: "3"
 
 services:
+
   db:
-    image: postgres:14-alpine
+    restart: always
+    image: postgres
+    container_name: betoch-postgres
+    environment:
+      - POSTGRES_USER=betoch-user
+      - POSTGRES_PASSWORD=betoch-password
+      - POSTGRES_DB=betoch-db
+      - POSTGRES_PORT=5432
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data/
-    restart: on-failure
+      - betoch_data:/var/lib/postgresql/data/
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app/frontend
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: betoch-pgadmin
+      depends_on:
+        - db
+      ports:
+        - "5051:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+        PGADMIN_DEFAULT_PASSWORD: root
+      restart: always
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - "8000:8000"
+      build:
+        context: ./backend
+        dockerfile: Dockerfile
+      environment:
+        - POSTGRES_USER=betoch-user
+        - POSTGRES_PASSWORD=betoch-password
+        - POSTGRES_DB=betoch-db
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+  frontend:
+      build:
+        context: ./frontend
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./frontend:/app/frontend/
+
+
+volumes:
+  betoch_data:
