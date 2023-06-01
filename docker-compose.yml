@@ -24,7 +24,7 @@ services:
       ports:
         - "5051:80"
       environment:
-        PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+        PGADMIN_DEFAULT_EMAIL: pgadmin4@betoch.org
         PGADMIN_DEFAULT_PASSWORD: root
       restart: always
 
@@ -48,6 +48,7 @@ services:
         - "3000:3000"
       volumes:
         - ./frontend:/app/frontend/
+      user: node
 
 
 volumes:

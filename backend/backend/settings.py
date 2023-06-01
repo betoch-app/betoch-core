@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'betoch-db',
         'USER': 'betoch-user',
-        'PASSWORD': 'betoch-db',
+        'PASSWORD': 'betoch-password',
         'HOST': 'db',
         'PORT': 5432
     }
