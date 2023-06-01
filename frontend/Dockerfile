@@ -1,13 +1,26 @@
-FROM node:16.15.0
-WORKDIR /app/frontend/
+# syntax=docker/dockerfile:1.4
 
-COPY package*.json /app/frontend/
+# Create image based on the official Node image from dockerhub
+FROM node:lts-buster AS development
 
-COPY . /app/frontend/
+# Create app directory
+WORKDIR /usr/src/app
 
-RUN npm cache clean --force
+# Copy dependency definitions
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
 
-RUN npm ci --legacy-peer-deps
+# Install dependecies
+#RUN npm set progress=false \
+#    && npm config set depth 0 \
+#    && npm i install
+RUN npm ci
 
+# Get all the code needed to run the app
+COPY . /usr/src/app
+
+# Expose the port the app runs in
 EXPOSE 3000
+
+# Serve the app
 CMD ["npm", "start"]

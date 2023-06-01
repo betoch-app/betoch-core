@@ -48,8 +48,6 @@ services:
         - "3000:3000"
       volumes:
         - ./frontend:/app/frontend/
-      user: node
-
 
 volumes:
   betoch_data:
