@@ -15,5 +15,9 @@ local computer. If you haven't, do the next steps.
  $ cd betoch-core/frontend </br>
  $ npm install
 
+## Database
+this application uses PostgreSQL database with pg admin 4 management tools
+you can manage or view your datas use the following link on your browser</br>
+http://localhost:5051/
 
-
+you can find the username and password inside docker-compose.yml pgadmin service
