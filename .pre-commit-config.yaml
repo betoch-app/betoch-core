@@ -1,0 +1,59 @@
+fail_fast: true
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: debug-statements
+      - id: detect-private-key
+      - id: name-tests-test
+        args: ["--django"]
+      - id: trailing-whitespace
+      - id: flake8
+      - id: requirements-txt-fixer
+      - id: no-commit-to-branch
+
+  - repo: https://github.com/ambv/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        args: ["--line-length=100"]
+        language_version: python3.8
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: isort-local
+        entry: isort
+        language: python
+        types: [python]
+        exclude: .+/(settings|migrations)/.+
+        pass_filenames: true
+      - id: missing-migrations
+        name: missing-migrations-local
+        entry: python manage.py makemigrations --check
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: prospector
+        name: prospector-local
+        entry: prospector --messages-only --
+        language: python
+        types: [python]
+        exclude: .+/(settings|migrations)/.+
+        pass_filenames: true
+      - id: mypy
+        name: Check mypy static types match
+        entry: mypy-check.sh
+        pass_filenames: true
+        language: script
+        types: [file]
+      - id: bandit
+        name: Check security issues
+        entry: bandit -x "tests,factories.py,conftest.py,migrations,node_modules" -r .
+        language: system
