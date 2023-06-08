@@ -18,7 +18,16 @@ local computer. If you haven't, do the next steps.
    $ cd betoch-core/frontend </br>
    $ npm install
 
-## Working with django rest framework
+## Working with local machine
+
+1. ## Database
+
+this application uses PostgreSQL database with pg admin 4 management tools
+you can manage or view your data by downloading postgreSQL and installing on your machine </br>
+
+after downloading and installing postgreSQL create betoch-core database inside your postgres server
+
+2. ## Working with django rest framework (backend)
 
 in order to work with django rest framework on your local machine. you have follow the following setups</br>
 
@@ -28,15 +37,25 @@ in order to work with django rest framework on your local machine. you have foll
    $ cd backend
 3. create your virtual environment </br>
    $ virtualenv venv
-4. install all project dependencies </br>
+4. activate your virtual environment </br>
+   $ venv/scripts/activate.bat
+5. install all project dependencies </br>
    $ pip install -r requirements.txt
-5. run your application </br>
+6. run your application </br>
    $ python manage.py runserver
+7. connect with your postgres database with django rest framework</br>
+   create .env file inside your backend/backend project and add the following patterns</br>
+   DATABASE_NAME=betoch-core</br>
+   DATABASE_USER=postgres</br>
+   DATABASE_PASSWORD=your_postgres_password</br>
+   DATABASE_HOST=localhost</br>
+   DATABASE_PORT=5432
 
-## Database
-
-this application uses PostgreSQL database with pg admin 4 management tools
-you can manage or view your datas use the following link on your browser</br>
-http://localhost:5051/
-
-you can find the username and password inside docker-compose.yml pgadmin service
+8. ## working with frontend
+   the frontend part is created using react framework with different library. So in order to work with the front end project you have to follow the following steps</br>
+9. move to frontend folder </br>
+   $ cd frontend
+10. install all of your dependencies </br>
+    $ npm install
+11. run your project</br>
+    $ npm start
