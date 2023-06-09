@@ -1,0 +1,46 @@
+.swiper-container {
+  width: 100%;
+  margin-inline: auto;
+
+  .swiper-title {
+    @extend .mp-font;
+
+    margin-block-end: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: $vh-secondary-gray-700;
+  }
+
+  .hidden-pagination-block {
+    // used for positioning the pagination dots below the cards as they are positioned absolute over the cards by default from the swiper library
+    height: 28px; // 12px height for pagination dots + spacing of 16px between dots and cards
+  }
+
+  .swiper-pagination {
+    height: 13px;
+  }
+
+  .swiper {
+    width: 100%;
+
+    .swiper-slide {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: $white;
+    border: 1px solid $vh-warm-gray-300;
+    box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: $vh-secondary-teal-500;
+    border: 1px solid $vh-secondary-teal-800;
+  }
+}
