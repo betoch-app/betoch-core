@@ -1,11 +1,15 @@
 const path = require('path');
-
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:storybook/recommended',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -15,7 +19,12 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react', 'import', 'react-hooks'],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.ts', '.tsx'],
+      },
+    ],
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/react-in-jsx-scope': 'off',
     'no-use-before-define': 'off',
@@ -71,7 +80,6 @@ module.exports = {
       },
     ],
   },
-
   settings: {
     'import/resolver': {
       typescript: {},
