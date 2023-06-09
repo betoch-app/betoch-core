@@ -1,16 +1,19 @@
 import { ConfigProvider, Button } from 'antd';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import GenericSpinner from './modules/core/views/components/GenericSwipper/GenericSpinner';
 import './styles/scss/main.scss';
 import _tokens from './styles/_theme_tokens.json';
+const AsyncRouterApp = lazy(() => import('./RouterApp'));
 const loader = <GenericSpinner />;
-const router = (
+
+const routerApp = (
   <div>
-    <Button type="default">Button</Button>
+    <AsyncRouterApp />
   </div>
 );
+const router = routerApp;
 function App() {
   return (
     <BrowserRouter key={''}>
