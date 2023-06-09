@@ -8,6 +8,7 @@
  @tailwind components;
  @tailwind utilities;
 
+ @import '../scss/base/fonts';
  @import '../scss/utils/index';
  @import '../../modules/core/styles/index.scss';
  @import '../../modules/authentication/styles/index.scss';

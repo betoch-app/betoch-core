@@ -7,7 +7,7 @@ import './styles/scss/main.scss';
 import _tokens from './styles/_theme_tokens.json';
 const AsyncRouterApp = lazy(() => import('./RouterApp'));
 const loader = <GenericSpinner />;
-
+console.log(navigator.language);
 const routerApp = (
   <div>
     <AsyncRouterApp />
