@@ -1,0 +1,14 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+
+  // prevent large text to overflow the modal, instead break the word into the next line
+  -ms-word-break: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}

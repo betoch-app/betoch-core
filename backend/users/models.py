@@ -8,13 +8,13 @@ import uuid
 class Users(AbstractUser, PermissionsMixin):
     # these fields tie to the roles
     KIRAY_ADMIN = 1
-    COMPANY_OWNER_OR_ADMIN = 2
+    OWNER_OR_ADMIN = 2
     SELLS = 3
 
     ROLE_CHOICES = (
-        (KIRAY_ADMIN, 'Kiray_admin'),
-        (COMPANY_OWNER_OR_ADMIN, 'Company_owner_or_admin'),
-        (SELLS, 'Sells')
+        (KIRAY_ADMIN, 'KIRAY_ADMIN'),
+        (OWNER_OR_ADMIN, 'OWNER_OR_ADMIN'),
+        (SELLS, 'SELLS')
     )
     username = None
     first_name = None
