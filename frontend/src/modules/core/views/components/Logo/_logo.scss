@@ -1,36 +1,10 @@
 .logo-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 30px;
+  flex-direction: row;
 
-  .big-letters-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-
-    .big-letters {
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-    }
+  .title {
+    font-size: 35px;
+    font-weight: bold;
   }
 
-
-  .titles-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    line-height: 20px;
-    color: white;
-    font-size: 20px;
-
-    .title {
-      font-weight: bold;
-      font-size: 20px;
-    }
-  }
 }
