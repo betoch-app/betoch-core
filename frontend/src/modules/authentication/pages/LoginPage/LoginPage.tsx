@@ -18,10 +18,8 @@ const LoginPage = () => {
           <LanguageSwitcher />
         </div>
         <Routes>
-          <Route path="/">
-            <Route index element={<Login />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
-          </Route>
+          <Route index element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </div>
     </div>
