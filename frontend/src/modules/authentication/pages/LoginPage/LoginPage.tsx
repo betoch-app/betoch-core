@@ -1,10 +1,11 @@
-import { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import GenericSpinner from '../../../core/views/components/GenericSwipper/GenericSpinner';
-import LanguageSwitcher from '../../../core/views/components/LanguageSwitcher/LanguageSwitcher';
-import Login from '../../components/Login/Login';
-import LoginSideBar from '../../components/LoginSideBar/LoginSideBar';
+import GenericSpinner from "../../../core/views/components/GenericSwipper/GenericSpinner";
+import LanguageSwitcher from "../../../core/views/components/LanguageSwitcher/LanguageSwitcher";
+import Login from "../../components/Login/Login";
+import LoginSideBar from "../../components/LoginSideBar/LoginSideBar";
+import ForgotPassword from "../../components/ForgotPassword/ForgotPassword";
 
 const LoginPage = () => {
   return (
@@ -16,11 +17,12 @@ const LoginPage = () => {
         <div className="flex flex-row w-full justify-end items-center">
           <LanguageSwitcher />
         </div>
-        <Suspense fallback={<GenericSpinner />}>
-          <Routes>
-            <Route path="/" element={<Login />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Login />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+          </Route>
+        </Routes>
       </div>
     </div>
   );

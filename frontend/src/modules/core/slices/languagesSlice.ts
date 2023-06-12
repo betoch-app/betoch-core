@@ -1,38 +1,38 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IAllLanguages, ILanguage } from './models/ILanguage.model';
+import { IAllLanguages, ILanguage } from "./models/ILanguage.model";
+import {
+  addSelectedLanguageToLocalStorage,
+  getCurrentSelectedLanguage,
+} from "../utils/consts";
 
 const initialState: IAllLanguages = {
   supportedLanguages: [
     {
-      name: 'English',
-      languageCode: 'EN',
-      countryCode: 'en-US',
-      code: 'en',
+      name: "English",
+      languageCode: "EN",
+      countryCode: "en-US",
+      code: "en",
     },
     {
-      name: 'አማርኛ',
-      languageCode: 'አማ',
-      countryCode: 'am-ET',
-      code: 'am',
+      name: "አማርኛ",
+      languageCode: "አማ",
+      countryCode: "am-ET",
+      code: "am",
     },
   ],
-  currentSelectedLanguage: {
-    name: 'English',
-    languageCode: 'EN',
-    code: 'en',
-    countryCode: 'en-US',
-  },
+  currentSelectedLanguage: getCurrentSelectedLanguage(),
 };
 
 const languageSlice = createSlice({
-  name: 'language',
+  name: "language",
   initialState: initialState,
   reducers: {
     addLanguage(state, action: PayloadAction<ILanguage>) {
       state.supportedLanguages.push(action.payload);
     },
     changeLanguage(state, action: PayloadAction<ILanguage>) {
+      addSelectedLanguageToLocalStorage(action.payload);
       state.currentSelectedLanguage = action.payload;
     },
   },
