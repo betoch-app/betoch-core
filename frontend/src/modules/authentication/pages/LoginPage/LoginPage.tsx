@@ -66,7 +66,7 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                 <Link to={"/forgot-password"} className="forgot-link">
                   Forgot password
                 </Link>
-                <Link to={"/signup"} className="forgot-link font-bold">
+                <Link to={"/signUp"} className="forgot-link font-bold">
                   Create new account
                 </Link>
               </div>
