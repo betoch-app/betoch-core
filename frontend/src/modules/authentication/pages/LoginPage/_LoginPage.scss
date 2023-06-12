@@ -1,0 +1,12 @@
+.forgot-lnk {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: $color-secondary !important;
+
+  :hover,
+  :focus {
+    color: $color-secondary !important;
+  }
+}

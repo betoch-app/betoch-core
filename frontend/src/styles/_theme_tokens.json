@@ -1,5 +1,6 @@
 {
-  "colorPrimary":"#CA6027",
+  "colorPrimary":"#00b96b",
+  "colorSecondary":"#B9004E",
   "colorLink": "#5C987A",
   "colorSuccess":"#52c41a"
 }
