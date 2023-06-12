@@ -8,7 +8,7 @@ const Router = () => {
     <Suspense fallback={null}>
       <Routes>
         {/** Anonymous route */}
-        <Route key={'urlLogin'} Component={LoginContainer} path={'/'} />
+        <Route key={'urlLogin'} element={<LoginContainer />} path={'/'} />
       </Routes>
     </Suspense>
   );
