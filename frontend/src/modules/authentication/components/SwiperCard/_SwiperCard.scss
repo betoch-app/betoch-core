@@ -1,0 +1,55 @@
+.swiper-card-container {
+  width: 500px;
+  min-height: auto;
+  padding-bottom: 6px;
+  overflow: hidden;
+  background-color: $white;
+  border-radius: 8px;
+
+  .image-container {
+    width: 100%;
+    height: 350px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+
+    .subtitle {
+      @extend .mp-font;
+
+      font-size: 10px;
+      font-weight: 500; // not using responisve fonts as card isn't responsive
+      line-height: 14px;
+      color: $vh-secondary-gray-600;
+    }
+
+    .title {
+      @extend .mp-h4-bold;
+
+      max-height: 20px;
+      overflow: hidden;
+      font-size: 14px; // not using responisve fonts as card isn't responsive
+      line-height: 20px;
+      color: $b2c-gray-900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .description {
+      @extend .mp-body-2-bold;
+
+      overflow: hidden;
+      font-size: 14px; // not using responisve fonts as card isn't responsive
+      line-height: 18px;
+    }
+  }
+}

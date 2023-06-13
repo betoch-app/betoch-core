@@ -8,6 +8,7 @@ import { useAppSelector } from "./modules/core/hooks/redux-hooks";
 import GenericSpinner from "./modules/core/views/components/GenericSwipper/GenericSpinner";
 import "./styles/scss/main.scss";
 import _tokens from "./styles/_theme_tokens.json";
+import SwiperCore, { Autoplay } from "swiper";
 
 const AsyncRouterApp = lazy(() => import("./RouterApp"));
 const loader = <GenericSpinner />;
@@ -19,6 +20,8 @@ const routerApp = (
 
 const router = routerApp;
 function App() {
+  SwiperCore.use([Autoplay]);
+
   const currentSelectedLanguage = useAppSelector(
     (state) => state.languageSlice.currentSelectedLanguage
   );
