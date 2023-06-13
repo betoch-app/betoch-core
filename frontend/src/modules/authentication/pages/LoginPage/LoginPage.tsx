@@ -24,21 +24,20 @@ const LoginPage = ({ onLogin, loading }: Props) => {
             <div>
               <div className="mb-2">
                 <Form.Item
-                  name="email"
-                  label="Email Address"
+                  name="phone"
+                  label="Phone number"
                   rules={[
                     {
                       required: true,
-                      type: "email",
-                      message: "Please enter a valid email address.",
+                      message: "Please enter your phone number.",
                     },
                   ]}
                 >
                   <Input
-                    autoComplete="email"
-                    type="email"
-                    placeholder={"Email"}
-                    name="email"
+                    autoComplete="phone"
+                    type="phone"
+                    placeholder={"Phone number"}
+                    name="phone"
                   />
                 </Form.Item>
               </div>
@@ -50,7 +49,7 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter a valid password",
+                      message: "Please enter your password",
                     },
                   ]}
                 >
@@ -62,7 +61,7 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                 </Form.Item>
               </div>
 
-              <div className="flex justify-start justify-between">
+              <div className="flex justify-start justify-between items-center">
                 <Link to={"/forgot-password"} className="forgot-link">
                   Forgot password
                 </Link>
