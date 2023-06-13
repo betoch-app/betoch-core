@@ -1,21 +1,26 @@
 import { Form, Input, Button } from "antd";
 import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { Link } from "react-router-dom";
+import { localeForgotPassword } from "./localeForgotPassword";
+import { IntlShape, injectIntl } from "react-intl";
+import { localLoginPage } from "../LoginPage/localeLoginPage";
+import { localeSignUpPage } from "../SignUpPage/localeSignUpPage";
 type Props = {
+  intl: IntlShape;
   onAccountRecovery: (values: any) => void;
   loading: boolean;
 };
-const ForgotPasswordPage = ({ onAccountRecovery, loading }: Props) => {
+const ForgotPasswordPage = ({ intl, onAccountRecovery, loading }: Props) => {
   const [forgotPasswordForm] = Form.useForm();
+  const { accountRecovery, subTitle, submit } = localeForgotPassword(intl);
+  const { phoneLabel, phoneError, backToSignInText } = localeSignUpPage(intl);
 
   return (
     <AuthenticationHOC>
       <div className="flex flex-col justify-center items-start mx-8 md:mx-auto w-full md:w-1/2 lg:w-96 z-20">
         <div className="flex flex-col justify-start  items-start ">
-          <span className="mt-4 font-bold">Account Recovery</span>
-          <span className="mt-4">
-            Enter your Phone number associated with your Kiray Kifiya account.
-          </span>
+          <span className="mt-4 font-bold">{accountRecovery}</span>
+          <span className="mt-4">{subTitle}</span>
         </div>
 
         <div className="mt-6 w-full">
@@ -27,11 +32,20 @@ const ForgotPasswordPage = ({ onAccountRecovery, loading }: Props) => {
           >
             <div>
               <div className="mb-2">
-                <Form.Item name="phone" label="Phone number">
+                <Form.Item
+                  name="phone"
+                  label={phoneLabel}
+                  rules={[
+                    {
+                      required: true,
+                      message: `${phoneError}`,
+                    },
+                  ]}
+                >
                   <Input
                     autoComplete="phone"
                     type="phone"
-                    placeholder={"Phone number"}
+                    placeholder={phoneLabel}
                     name="phone"
                   />
                 </Form.Item>
@@ -73,17 +87,17 @@ const ForgotPasswordPage = ({ onAccountRecovery, loading }: Props) => {
                           values="0 50 50;360 50 50"
                           keyTimes="0;1"
                         >
-                          <span>Submit</span>
+                          <span>{submit}</span>
                         </animateTransform>
                       </circle>
                     </svg>
                   ) : null}
-                  <span>Submit</span>
+                  <span>{submit}</span>
                 </Button>
               </div>
 
               <div className="flex justify-end mt-6 forgot-link">
-                <Link to={"/"}>Back to Sign in</Link>
+                <Link to={"/"}>{backToSignInText}</Link>
               </div>
             </div>
           </Form>
@@ -93,4 +107,4 @@ const ForgotPasswordPage = ({ onAccountRecovery, loading }: Props) => {
   );
 };
 
-export default ForgotPasswordPage;
+export default injectIntl(ForgotPasswordPage);

@@ -24,7 +24,10 @@
     "authentication.signUp.confirmPassword":"Confirm password",
     "authentication.signUp.confirmPasswordError":"Password didn't matched. Please enter your password again.",
     "authentication.signUp.signUpBtnText":"Sign up",
-    "authentication.signUp.backToLoginText":"Back to Sign in"
+    "authentication.signUp.backToLoginText":"Back to Sign in",
+    "authentication.forgotPassword.title":"Account recovery",
+    "authentication.forgotPassword.subTitle":"Enter your Phone number associated with your Kiray Kifiya account.",
+    "authentication.forgotPassword.submit":"Submit"
   },
 
   "am-ET": {
@@ -52,6 +55,9 @@
     "authentication.signUp.confirmPassword":"የይለፍ ቃለዎን ያረጋግጡ",
     "authentication.signUp.confirmPasswordError":"ያስገቡት የይልፍ ቃል ተመሳሳይ አይደለም። እባክዎ እንደገና ይሞክሩ",
     "authentication.signUp.signUpBtnText":"መዝግብ",
-    "authentication.signUp.backToLoginText":"ወደ መግቢያ መልስ"
+    "authentication.signUp.backToLoginText":"ወደ መግቢያ መልስ",
+    "authentication.forgotPassword.title":"አካውንትዎን መልሰው ለማግኘት",
+    "authentication.forgotPassword.subTitle":"ከክራይ ክፊያ መለያ ጋር የተገናኘውን ስልክ ቁጥርዎን ያስገቡ",
+    "authentication.forgotPassword.submit":"አስገባ"
   }
 }
