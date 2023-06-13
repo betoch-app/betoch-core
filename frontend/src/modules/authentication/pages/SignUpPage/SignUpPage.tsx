@@ -3,25 +3,46 @@ import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { Link } from "react-router-dom";
 
 type Props = {
-  onLogin: (values: any) => void;
+  onSignUp: (values: any) => void;
   loading: boolean;
 };
-const LoginPage = ({ onLogin, loading }: Props) => {
-  const [loginForm] = Form.useForm();
+const SignUpPage = ({ onSignUp, loading }: Props) => {
+  const [signUpForm] = Form.useForm();
+
   return (
     <AuthenticationHOC>
       <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20 ">
         <span className="font-medium text-gray-900 text-2xl">
-          Sign into Kiray Kifiya
+          Sign up Kiray Kifiya
         </span>
         <div className="mt-10">
           <Form
-            onFinish={onLogin}
-            form={loginForm}
+            onFinish={onSignUp}
+            form={signUpForm}
             layout="vertical"
             requiredMark={false}
           >
             <div>
+              <div className="mb-2">
+                <Form.Item
+                  name="fullName"
+                  label="Full name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your full name E.g Mahder Girma",
+                    },
+                  ]}
+                >
+                  <Input
+                    autoComplete="off"
+                    type="text"
+                    placeholder="Full name e.g Mahder Girma"
+                    name="fullName"
+                  />
+                </Form.Item>
+              </div>
+
               <div className="mb-2">
                 <Form.Item
                   name="phone"
@@ -61,14 +82,25 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                 </Form.Item>
               </div>
 
-              <div className="flex justify-start justify-between items-center">
-                <Link to={"/forgot-password"} className="forgot-link">
-                  Forgot password
-                </Link>
-                <Link to={"/signUp"} className="forgot-link font-bold">
-                  Create new account
-                </Link>
+              <div className="mb-2">
+                <Form.Item
+                  name="confirmPassword"
+                  label="Confirm password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please confirm your password",
+                    },
+                  ]}
+                >
+                  <Input
+                    type={"password"}
+                    placeholder="Confirm password"
+                    name="password"
+                  />
+                </Form.Item>
               </div>
+
               <div className="mt-10 text-center">
                 <Button
                   id="submit"
@@ -105,28 +137,17 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                           values="0 50 50;360 50 50"
                           keyTimes="0;1"
                         >
-                          <span>Log in</span>
+                          <span>Sign up</span>
                         </animateTransform>
                       </circle>
                     </svg>
                   ) : null}
-                  <span>Log in</span>
+                  <span>Sign up</span>
                 </Button>
               </div>
 
-              <div className="flex justify-start mt-5">
-                <div>
-                  <span>
-                    By logging in, you agree to our
-                    <a
-                      className="ml-2 font-bold"
-                      target={"_blank"}
-                      href={"https://google.com"}
-                    >
-                      Privacy Policy
-                    </a>
-                  </span>
-                </div>
+              <div className="flex justify-end mt-6 forgot-link">
+                <Link to={"/"}>Back to Sign in</Link>
               </div>
             </div>
           </Form>
@@ -136,4 +157,4 @@ const LoginPage = ({ onLogin, loading }: Props) => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
