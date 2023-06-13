@@ -1,18 +1,36 @@
 import { Form, Input, Button } from "antd";
 import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl.macro";
+import { IntlShape, injectIntl } from "react-intl";
+import { localLoginPage } from "./localeLoginPage";
 
 type Props = {
+  intl: IntlShape;
   onLogin: (values: any) => void;
   loading: boolean;
 };
-const LoginPage = ({ onLogin, loading }: Props) => {
+const LoginPage = ({ intl, onLogin, loading }: Props) => {
   const [loginForm] = Form.useForm();
+  const {
+    signInTitle,
+    phoneLabel,
+    phoneError,
+    phonePlaceholder,
+    passwordLabel,
+    passwordError,
+    forgotPassword,
+    createNewAccount,
+    loginBtnText,
+    loginInfo,
+    privacyPolicy,
+  } = localLoginPage(intl);
+
   return (
     <AuthenticationHOC>
       <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20 ">
         <span className="font-medium text-gray-900 text-2xl">
-          Sign into Kiray Kifiya
+          {signInTitle}
         </span>
         <div className="mt-10">
           <Form
@@ -25,18 +43,18 @@ const LoginPage = ({ onLogin, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="phone"
-                  label="Phone number"
+                  label={phoneLabel}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your phone number.",
+                      message: `${phoneError}`,
                     },
                   ]}
                 >
                   <Input
                     autoComplete="phone"
                     type="phone"
-                    placeholder={"Phone number"}
+                    placeholder={phonePlaceholder}
                     name="phone"
                   />
                 </Form.Item>
@@ -45,17 +63,17 @@ const LoginPage = ({ onLogin, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="password"
-                  label="Password"
+                  label={passwordLabel}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password",
+                      message: `${passwordError}`,
                     },
                   ]}
                 >
                   <Input
                     type={"password"}
-                    placeholder="Password"
+                    placeholder={passwordLabel}
                     name="password"
                   />
                 </Form.Item>
@@ -63,10 +81,10 @@ const LoginPage = ({ onLogin, loading }: Props) => {
 
               <div className="flex justify-start justify-between items-center">
                 <Link to={"/forgot-password"} className="forgot-link">
-                  Forgot password
+                  {forgotPassword}
                 </Link>
                 <Link to={"/signUp"} className="forgot-link font-bold">
-                  Create new account
+                  {createNewAccount}
                 </Link>
               </div>
               <div className="mt-10 text-center">
@@ -105,25 +123,25 @@ const LoginPage = ({ onLogin, loading }: Props) => {
                           values="0 50 50;360 50 50"
                           keyTimes="0;1"
                         >
-                          <span>Log in</span>
+                          <span>{loginBtnText}</span>
                         </animateTransform>
                       </circle>
                     </svg>
                   ) : null}
-                  <span>Log in</span>
+                  <span>{loginBtnText}</span>
                 </Button>
               </div>
 
               <div className="flex justify-start mt-5">
                 <div>
                   <span>
-                    By logging in, you agree to our
+                    {loginInfo}
                     <a
                       className="ml-2 font-bold"
                       target={"_blank"}
                       href={"https://google.com"}
                     >
-                      Privacy Policy
+                      {privacyPolicy}
                     </a>
                   </span>
                 </div>
@@ -136,4 +154,4 @@ const LoginPage = ({ onLogin, loading }: Props) => {
   );
 };
 
-export default LoginPage;
+export default injectIntl(LoginPage);

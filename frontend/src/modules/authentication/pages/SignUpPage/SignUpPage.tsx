@@ -1,19 +1,36 @@
 import { Form, Input, Button } from "antd";
 import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { Link } from "react-router-dom";
+import { IntlShape, injectIntl } from "react-intl";
+import { localeSignUpPage } from "./localeSignUpPage";
 
 type Props = {
+  intl: IntlShape;
   onSignUp: (values: any) => void;
   loading: boolean;
 };
-const SignUpPage = ({ onSignUp, loading }: Props) => {
+const SignUpPage = ({ intl, onSignUp, loading }: Props) => {
   const [signUpForm] = Form.useForm();
+  const {
+    signUpTitle,
+    fullNameLabel,
+    fullNamePlaceholder,
+    fullNameError,
+    phoneLabel,
+    phoneError,
+    password,
+    passwordError,
+    confirmPassword,
+    confirmPasswordError,
+    signUbBtnText,
+    backToSignInText,
+  } = localeSignUpPage(intl);
 
   return (
     <AuthenticationHOC>
       <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20 ">
         <span className="font-medium text-gray-900 text-2xl">
-          Sign up Kiray Kifiya
+          {signUpTitle}
         </span>
         <div className="mt-10">
           <Form
@@ -26,18 +43,18 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="fullName"
-                  label="Full name"
+                  label={fullNameLabel}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your full name E.g Mahder Girma",
+                      message: `${fullNameError}`,
                     },
                   ]}
                 >
                   <Input
                     autoComplete="off"
                     type="text"
-                    placeholder="Full name e.g Mahder Girma"
+                    placeholder={fullNamePlaceholder}
                     name="fullName"
                   />
                 </Form.Item>
@@ -46,18 +63,18 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="phone"
-                  label="Phone number"
+                  label={phoneLabel}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your phone number.",
+                      message: `${phoneError}`,
                     },
                   ]}
                 >
                   <Input
                     autoComplete="phone"
                     type="phone"
-                    placeholder={"Phone number"}
+                    placeholder={phoneLabel}
                     name="phone"
                   />
                 </Form.Item>
@@ -66,17 +83,17 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="password"
-                  label="Password"
+                  label={password}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password",
+                      message: `${passwordError}`,
                     },
                   ]}
                 >
                   <Input
                     type={"password"}
-                    placeholder="Password"
+                    placeholder={password}
                     name="password"
                   />
                 </Form.Item>
@@ -85,17 +102,17 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
               <div className="mb-2">
                 <Form.Item
                   name="confirmPassword"
-                  label="Confirm password"
+                  label={confirmPassword}
                   rules={[
                     {
                       required: true,
-                      message: "Please confirm your password",
+                      message: `${confirmPasswordError}`,
                     },
                   ]}
                 >
                   <Input
                     type={"password"}
-                    placeholder="Confirm password"
+                    placeholder={confirmPassword}
                     name="password"
                   />
                 </Form.Item>
@@ -137,17 +154,17 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
                           values="0 50 50;360 50 50"
                           keyTimes="0;1"
                         >
-                          <span>Sign up</span>
+                          <span>{signUbBtnText}</span>
                         </animateTransform>
                       </circle>
                     </svg>
                   ) : null}
-                  <span>Sign up</span>
+                  <span>{signUbBtnText}</span>
                 </Button>
               </div>
 
               <div className="flex justify-end mt-6 forgot-link">
-                <Link to={"/"}>Back to Sign in</Link>
+                <Link to={"/"}>{backToSignInText}</Link>
               </div>
             </div>
           </Form>
@@ -157,4 +174,4 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
   );
 };
 
-export default SignUpPage;
+export default injectIntl(SignUpPage);
