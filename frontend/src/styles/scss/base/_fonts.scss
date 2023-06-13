@@ -9,3 +9,30 @@ $roboto-slab-font: robotoslab, sans-serif;
 .roboto-slab-font {
   font-family: $roboto_slab_font !important;
 }
+
+.mp-h4-bold {
+  @extend .mp-font;
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.mp-body-2 {
+  @extend .mp-font;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+
+.mp-body-2-bold {
+  @extend .mp-font;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
