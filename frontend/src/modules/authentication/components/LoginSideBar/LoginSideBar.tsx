@@ -10,7 +10,11 @@ const LoginSideBar = () => {
       <div className="flex justify-center items-center h-screen">
         <SwiperHOC spaceBetween={52} showPaginationDots>
           {imagesData.map((item, idx) => (
-            <SwiperCard description={item.description} image={item.image} />
+            <SwiperCard
+              key={idx}
+              description={item.description}
+              image={item.image}
+            />
           ))}
         </SwiperHOC>
       </div>

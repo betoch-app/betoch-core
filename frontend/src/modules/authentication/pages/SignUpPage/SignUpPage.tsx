@@ -22,7 +22,7 @@ const SignUpPage = ({ intl, onSignUp, loading }: Props) => {
     passwordError,
     confirmPassword,
     confirmPasswordError,
-    signUbBtnText,
+    signUpBtnText,
     backToSignInText,
   } = localeSignUpPage(intl);
 
@@ -103,11 +103,22 @@ const SignUpPage = ({ intl, onSignUp, loading }: Props) => {
                 <Form.Item
                   name="confirmPassword"
                   label={confirmPassword}
+                  dependencies={["password"]}
                   rules={[
                     {
                       required: true,
                       message: `${confirmPasswordError}`,
                     },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(`${confirmPasswordError}`)
+                        );
+                      },
+                    }),
                   ]}
                 >
                   <Input
@@ -154,12 +165,12 @@ const SignUpPage = ({ intl, onSignUp, loading }: Props) => {
                           values="0 50 50;360 50 50"
                           keyTimes="0;1"
                         >
-                          <span>{signUbBtnText}</span>
+                          <span>{signUpBtnText}</span>
                         </animateTransform>
                       </circle>
                     </svg>
                   ) : null}
-                  <span>{signUbBtnText}</span>
+                  <span>{signUpBtnText}</span>
                 </Button>
               </div>
 

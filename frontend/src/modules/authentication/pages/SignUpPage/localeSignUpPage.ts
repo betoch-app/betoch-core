@@ -34,7 +34,7 @@ export const localeSignUpPage = (intl: IntlShape) => {
     id: "authentication.signUp.confirmPasswordError",
   });
 
-  const signUbBtnText = intl.formatMessage({
+  const signUpBtnText = intl.formatMessage({
     id: "authentication.signUp.signUpBtnText",
   });
   const backToSignInText = intl.formatMessage({
@@ -52,7 +52,7 @@ export const localeSignUpPage = (intl: IntlShape) => {
     passwordError,
     confirmPassword,
     confirmPasswordError,
-    signUbBtnText,
+    signUpBtnText,
     backToSignInText,
   };
 };
