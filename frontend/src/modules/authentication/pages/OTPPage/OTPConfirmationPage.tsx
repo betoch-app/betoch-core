@@ -15,7 +15,7 @@ const OTPConfirmationPage = ({
 }: Props) => {
   return (
     <AuthenticationHOC>
-      {status === "loading" && <GenericSpinner />}
+      {status === "loading" && <span>Loading...</span>}
       {status === "failed" && <span>Something is not good</span>}
       {status === "fulfilled" && (
         <OTPConfirmation

@@ -11,7 +11,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const config = {
   headers: {
-    Authorization: `Apikey ${API_KEY}`,
+    Authorization: `ApiKey ${API_KEY}`,
   },
 };
 
