@@ -9,6 +9,16 @@ const AxiosService = () => {
 
   //create instance
   const instance = axios.create(defaultConfig);
+  instance.interceptors.request.use(async (config) => {
+    const storageAccess = localStorage.getItem("token-storage") || "{}";
+    const accessToken = JSON.parse(storageAccess)?.accessToken;
+
+    if (accessToken) {
+      config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : "";
+    }
+
+    return config;
+  });
 
   return instance;
 };

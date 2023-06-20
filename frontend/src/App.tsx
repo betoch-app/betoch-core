@@ -10,7 +10,7 @@ import "./styles/scss/main.scss";
 import _tokens from "./styles/_theme_tokens.json";
 import SwiperCore, { Autoplay } from "swiper";
 
-const AsyncRouterApp = lazy(() => import("./RouterApp"));
+const AsyncRouterApp = lazy(() => import("./AuthenticationApp"));
 const loader = <GenericSpinner />;
 const routerApp = (
   <div>
