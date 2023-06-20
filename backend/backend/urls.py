@@ -16,9 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users import urls as users_url
+from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/auth/", include('users.urls')),
+    path('api/auth/', include('users.urls')),
+    path('api/company/',include('company.urls')),
+    path('api/branch/',include('branch.urls')),
+    path('openapi/', get_schema_view(
+        title="Betoch ",
+        description="API developers hpoing to use our service"
+    ), name='openapi-schema'),
+    path('docs/', TemplateView.as_view(
+        template_name='documentation.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui')
+
+    
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)
+

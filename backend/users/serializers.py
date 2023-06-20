@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import Users
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import update_last_login
+
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -42,12 +42,12 @@ class UserLoginSerializer(serializers.Serializer):
             refresh = RefreshToken.for_user(user)
             refresh_token = str(refresh)
             access_token = str(refresh.access_token)
-            update_last_login(None, user)
+            update_last_login(user) # type: ignore
             validation = {
                 'access_token': access_token,
                 'refresh_token': refresh_token,
-                'phone': user.phone,
-                'role': user.role,
+                'phone': phone,
+                'password':password
             }
 
             return validation
