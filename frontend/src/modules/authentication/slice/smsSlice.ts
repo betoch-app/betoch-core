@@ -1,65 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { ICreateConfirmationCode, ICreateSMSResponse } from "./model/Sms";
 import axios from "axios";
-import {
-  IOrganizationResponse,
-  ICreateConfirmationCode,
-} from "./model/IOrganization";
+import { SMS_URL, headerConfig } from "./config/SMSConfig";
 
-const SMS_URL = `${process.env.REACT_APP_SMS_API_BASE_URL}`;
-const organization_id = process.env.REACT_APP_SMS_ORGANIZATION_ID;
-const API_KEY = process.env.REACT_APP_API_KEY;
-
-const config = {
-  headers: {
-    Authorization: `ApiKey ${API_KEY}`,
-  },
+const initialState: ICreateSMSResponse = {
+  success: false,
+  message: "",
+  error: false,
 };
-
-export const getOrganization = createAsyncThunk(
-  "api/organization",
-  async () => {
-    const response = await axios.get(
-      `${SMS_URL}organization/${organization_id}/`,
-      config
-    );
-    return response.data;
-  }
-);
 
 export const createNewConfirmationCode = createAsyncThunk(
   "api/createConfirmationCode",
   async (data: ICreateConfirmationCode) => {
-    const response = await axios.post(`${SMS_URL}organization/`, data, config);
+    const response = await axios.post(`${SMS_URL}SMS`, data, headerConfig);
     return response.data;
   }
 );
 
-const initialState: IOrganizationResponse = {
-  organization: {
-    id: 0,
-    phone_number: "",
-    name: "",
-  },
-  status: "idle",
-  error: "",
-};
-
 const smsSlice = createSlice({
-  name: "organization",
+  name: "SMS",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getOrganization.pending, (state) => {
-        state.status = "loading";
+      .addCase(createNewConfirmationCode.pending, (state) => {
+        state.success = false;
       })
-      .addCase(getOrganization.fulfilled, (state, action) => {
-        state.status = "fulfilled";
-        state.organization = action.payload;
+      .addCase(createNewConfirmationCode.fulfilled, (state, action) => {
+        state.success = action.payload?.success;
+        state.message = action.payload?.message;
       })
-      .addCase(getOrganization.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = "error";
+      .addCase(createNewConfirmationCode.rejected, (state) => {
+        state.error = true;
+        state.success = false;
+        state.message = "Problem with sending SMS confirmation text";
       });
   },
 });

@@ -4,13 +4,14 @@ export interface IOrganization {
   name: string;
 }
 
+export interface ICreateConfirmationResponse {
+  success: boolean;
+  message: string;
+}
+
 export interface IOrganizationResponse {
   organization: IOrganization;
   status: string;
-  error: string;
-}
-
-export interface ICreateConfirmationCode {
-  receiver_phone: string;
-  organization_id: string;
+  is_loading: boolean;
+  error: boolean;
 }

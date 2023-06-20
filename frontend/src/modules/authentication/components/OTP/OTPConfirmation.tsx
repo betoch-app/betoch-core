@@ -7,19 +7,13 @@ import CustomMDReactComponent from "../../../core/views/components/CustomMDReact
 
 type Props = {
   intl: IntlShape;
-  receiver_phone: string;
-  organization_phone: string;
 };
-const OTPConfirmation = ({
-  intl,
-  receiver_phone,
-  organization_phone,
-}: Props) => {
+const OTPConfirmation = ({ intl }: Props) => {
   const [OTPform] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const { confirmationTitle } = localeOTP(intl, `**${organization_phone}**`);
+  const { confirmationTitle } = localeOTP(intl, `**09234545**`);
 
-  const onOtpFormFinish = (values: any) => {
+  const onFinish = (values: any) => {
     console.log(values);
   };
   return (
@@ -31,7 +25,7 @@ const OTPConfirmation = ({
           className="font-medium text-gray-900 text-lg"
         />
         <Form
-          onFinish={onOtpFormFinish}
+          onFinish={onFinish}
           form={OTPform}
           layout="vertical"
           className="mt-5"

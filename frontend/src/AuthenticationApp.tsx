@@ -5,7 +5,6 @@ import LoginContainer from "./modules/authentication/containers/LoginContainer";
 import NotFound from "./modules/core/views/components/NotFound/NotFound";
 import ForgotPasswordContainer from "./modules/authentication/containers/ForgotPasswordContainer";
 import SignUpContainer from "./modules/authentication/containers/SignUpContainer";
-import OTPConfirmContainer from "./modules/authentication/containers/OTPConfirmContainer";
 
 const Router = () => {
   return (
@@ -15,7 +14,6 @@ const Router = () => {
         <Route key={"urlLogin"} element={<LoginContainer />} path={"/"} />
         <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
         <Route path="/signUp" element={<SignUpContainer />} />
-        <Route path="/accountConfirmation" element={<OTPConfirmContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
