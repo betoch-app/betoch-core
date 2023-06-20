@@ -1,11 +1,9 @@
 from django.urls import path
-from .views import (companyApiDetail,companyApiList)
+from .views import (companyDetail,companyList)
 urlpatterns = [
    
-    path('companyDetails', companyApiDetail.as_view(),name='companyDetails'),
-    path('companyList/<int:pk>/',companyApiList.as_view())
-    #path('companyList/update/<int:id>/',companyApiList.updateCompanyByid),
-    #path('companyList/delete/<int:id>/',companyApiList.deleteCompanyById)
+    path('companyApiDetails', companyDetail.as_view(),name='companyApiDetails'),
+    path('companyApiList/<int:pk>/',companyList.as_view(),name='companyApiList')
 
     
 

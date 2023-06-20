@@ -26,8 +26,13 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('users.urls')),
+    #company Api
     path('api/company/',include('company.urls')),
+    #branch Api
     path('api/branch/',include('branch.urls')),
+    #House APi
+    path('api/house/',include('house.urls')),
+    #api documentation
     path('openapi/', get_schema_view(
         title="Betoch ",
         description="API developers hpoing to use our service"

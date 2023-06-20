@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'company',
     'branch',
+    'house',
     'rest_framework_swagger'
 ]
 

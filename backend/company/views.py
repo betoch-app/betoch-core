@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 #Get all Company Details and Create
 #@api_view(['GET','POST'])
-class companyApiDetail(APIView):
+class companyDetail(APIView):
     http_method_names = ['get', 'head', 'post']
 
     #Get All Company
@@ -25,7 +25,7 @@ class companyApiDetail(APIView):
 
         #Update Company
         #Delete Company
-class companyApiList(APIView):
+class companyList(APIView):
     #permission_classes = [permissions.IsAuthenticated]
         http_method_names = ['get', 'head', 'put','delete']
         def get_object(self, pk):
