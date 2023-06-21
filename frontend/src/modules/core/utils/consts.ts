@@ -8,6 +8,8 @@ import building from "../../../media/images/building.jpg";
 
 export const SELECTED_LANGUAGE: string = "SELECTED_LANGUAGE";
 
+export const BASE_URL = process.env.REACT_APP_API_URL;
+
 export const CURRENT_SELECETED_LANGUAGE = {
   name: "English",
   languageCode: "EN",

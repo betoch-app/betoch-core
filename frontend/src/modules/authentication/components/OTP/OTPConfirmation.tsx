@@ -7,15 +7,13 @@ import CustomMDReactComponent from "../../../core/views/components/CustomMDReact
 
 type Props = {
   intl: IntlShape;
+  onOTPConfirmation: (values: any) => void;
 };
-const OTPConfirmation = ({ intl }: Props) => {
+const OTPConfirmation = ({ intl, onOTPConfirmation }: Props) => {
   const [OTPform] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const { confirmationTitle } = localeOTP(intl, `**09234545**`);
 
-  const onFinish = (values: any) => {
-    console.log(values);
-  };
   return (
     <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20">
       <OTPLogo />
@@ -25,7 +23,7 @@ const OTPConfirmation = ({ intl }: Props) => {
           className="font-medium text-gray-900 text-lg"
         />
         <Form
-          onFinish={onFinish}
+          onFinish={onOTPConfirmation}
           form={OTPform}
           layout="vertical"
           className="mt-5"
@@ -34,7 +32,7 @@ const OTPConfirmation = ({ intl }: Props) => {
           <div>
             <div className="mb-2">
               <Form.Item
-                name="OTPCode"
+                name="code"
                 label={"Enter confirmation code"}
                 rules={[
                   {
@@ -47,7 +45,7 @@ const OTPConfirmation = ({ intl }: Props) => {
                   autoComplete="off"
                   type="text"
                   placeholder={"Enter the confirmation code"}
-                  name="OTPCode"
+                  name="code"
                 />
               </Form.Item>
             </div>

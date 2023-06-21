@@ -10,24 +10,30 @@ from rest_framework import status
 from .models import Users
 
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
-
-
 class AuthUserRegistrationView(APIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = (AllowAny, )
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
-        valid = serializer.is_valid(raise_exception=True)
+        valid = serializer.is_valid()
+
         if valid:
             serializer.save()
-            status_code = status.HTTP_200_OK
+
+            # send OTP confirmation code
             response = send_confirmation_code(
                 request.data['phone'])
-            return Response(response, status=status_code)
+            return Response({
+                'status': response['success'],
+                'message': response['message'],
+                'data': serializer.data
+            }, status=status.HTTP_200_OK)
+
+        errors = {}
+        for field_name, field_errors in serializer.errors.items():
+            errors[field_name] = field_errors[0]
+        return Response(errors, status=status.HTTP_403_FORBIDDEN)
 
 
 class AuthUserLoginView(APIView):
@@ -37,7 +43,7 @@ class AuthUserLoginView(APIView):
     def post(self, request):
         serializer = self.serialize_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
-
+        print(valid)
         if valid:
             status_code = status.HTTP_200_OK
             response = {

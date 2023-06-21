@@ -8,6 +8,7 @@ from .models import Users
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
+    ordering = ['phone']
 
     model = Users
 
@@ -26,8 +27,6 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('full_name', 'phone', 'password1', 'password2', 'is_staff', 'is_active')}
          ),
     )
-    search_fields = ('email',)
-    ordering = ('email',)
 
 
 admin.site.register(Users, CustomUserAdmin)
