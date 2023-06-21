@@ -1,43 +1,47 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { IOType } from "child_process";
 import { IHttpResponse } from "./model/HttpResponse";
-import { ISignUp } from "../models/SignUp";
 import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
+import { IOtp } from "./model/IOtp";
 
 const initialState: IHttpResponse = {
   success: false,
   message: "",
-  data: "" || {},
+  data: {},
   error: false,
 };
 
-export const signUp = createAsyncThunk(
-  "api/auth/signUp",
-  async (data: ISignUp) => {
-    const response = await httpService.post(`${BASE_URL}auth/signup`, data);
+export const OTPConfirmation = createAsyncThunk(
+  "api/auth/OTPConfirmation",
+  async (data: IOtp) => {
+    const response = await httpService.post(
+      `${BASE_URL}auth/OTPConfirmation`,
+      data
+    );
     return response.data;
   }
 );
 
-const signUpSlice = createSlice({
-  name: "signUp",
+const otpSlice = createSlice({
+  name: "OTPConfirmation",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state) => {
+      .addCase(OTPConfirmation.pending, (state) => {
         state.success = false;
       })
-      .addCase(signUp.fulfilled, (state, action) => {
+      .addCase(OTPConfirmation.fulfilled, (state, action) => {
         state.success = true;
         state.message = action.payload?.message;
-        state.data = action.payload?.data;
       })
-      .addCase(signUp.rejected, (state) => {
+      .addCase(OTPConfirmation.rejected, (state) => {
         state.message = "Something is not good ):";
         state.success = false;
         state.error = true;
       });
   },
 });
-export default signUpSlice.reducer;
+
+export default otpSlice.reducer;
