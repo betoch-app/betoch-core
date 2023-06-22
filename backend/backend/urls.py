@@ -32,6 +32,10 @@ urlpatterns = [
     path('api/branch/',include('branch.urls')),
     #House APi
     path('api/house/',include('house.urls')),
+    #Room api
+    path('api/room/',include('room.urls')),
+    #penality Api
+    path('api/penality/',include('penality.urls')),
     #api documentation
     path('openapi/', get_schema_view(
         title="Betoch ",

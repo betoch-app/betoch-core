@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'company',
     'branch',
     'house',
+    'room',
+    'penality',
     'rest_framework_swagger'
 ]
 

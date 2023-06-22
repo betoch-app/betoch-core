@@ -4,7 +4,9 @@ from users.models import Users
 class Branch(models.Model):
     branchName=models.CharField(max_length=100,blank=True,null=True)
     branchNumber=models.IntegerField()
-    users=models.ForeignKey(Users, verbose_name=("user"), on_delete=models.PROTECT)
-    company=models.ForeignKey(Company,verbose_name=("company"),on_delete=models.PROTECT)
+    users=models.ForeignKey(Users, verbose_name=("userid"), on_delete=models.PROTECT)
+    company=models.ForeignKey(Company,verbose_name=("companyid"),on_delete=models.PROTECT)
+    registered_date=models.DateField(null=True,blank=True)
+    status=models.CharField(max_length=20,null=True,blank=True)
     def __str__(self):
         return  self.branchName
