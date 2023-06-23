@@ -8,10 +8,10 @@ import CustomMDReactComponent from "../../../core/views/components/CustomMDReact
 type Props = {
   intl: IntlShape;
   onOTPConfirmation: (values: any) => void;
+  loading: boolean;
 };
-const OTPConfirmation = ({ intl, onOTPConfirmation }: Props) => {
+const OTPConfirmation = ({ intl, onOTPConfirmation, loading }: Props) => {
   const [OTPform] = Form.useForm();
-  const [loading, setLoading] = useState(false);
   const { confirmationTitle } = localeOTP(intl, `**09234545**`);
 
   return (

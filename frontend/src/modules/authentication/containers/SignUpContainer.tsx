@@ -2,7 +2,7 @@ import { useState } from "react";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import { useAppDispatch } from "../../core/hooks/redux-hooks";
 import { ISignUp } from "../models/SignUp";
-import { signUp } from "../slice/signUpSlice";
+import { signUp } from "../slice/authenticationSlice";
 
 const SignUpContainer = () => {
   const dispatch = useAppDispatch();

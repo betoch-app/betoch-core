@@ -1,9 +1,9 @@
 import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { useAppSelector } from "../../../core/hooks/redux-hooks";
 import SignUp from "../../components/SignUp/SignUp";
-import OTPConfirmation from "../../components/OTP/OTPConfirmation";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { OTPType } from "../../components/OTP/OTPType";
 type Props = {
   onSignUp: (values: any) => void;
   loading: boolean;
@@ -15,11 +15,13 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
     data = { phone: "" },
     message,
     error,
-  } = useAppSelector((state) => state.signUpSlice);
+  } = useAppSelector((state) => state.authenticationSlice);
 
   useEffect(() => {
     if (success) {
-      navigate("/accountConfirmation", { state: data });
+      navigate("/accountConfirmation", {
+        state: { ...data, OTPType: OTPType.AccountConfirmation },
+      });
     }
   }, [success]);
 
@@ -29,7 +31,7 @@ const SignUpPage = ({ onSignUp, loading }: Props) => {
         onSignUp={onSignUp}
         loading={error ? false : loading}
         error={error}
-        errorMessage={message}
+        errorMessage={success ? "" : message}
       />
     </AuthenticationHOC>
   );

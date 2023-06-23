@@ -3,8 +3,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import (UserRegistrationSerializer,
-                          UserLoginSerializer, UserListSerializer)
+from .serializers import (UserRegistrationSerializer, SendOTPSerializer,
+                          UserLoginSerializer, ChangePasswordSerializer, UserListSerializer)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 from .models import Users
@@ -43,7 +43,6 @@ class AuthUserLoginView(APIView):
     def post(self, request):
         serializer = self.serialize_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
-        print(valid)
         if valid:
             status_code = status.HTTP_200_OK
             response = {
@@ -81,6 +80,50 @@ class OTPConfirmationView(APIView):
             }, status=status.HTTP_200_OK)
 
         return Response({'status': False, 'message': "OTP verification failed"}, status=status.HTTP_403_FORBIDDEN)
+
+
+class SendOTPAPIView(APIView):
+    serializer_class = SendOTPSerializer
+    permission_classes = (AllowAny, )
+
+    def post(self, request):
+        receiver_phone = request.data['receiver_phone']
+        if Users.objects.filter(phone=receiver_phone).exists:
+            # send OTP confirmation code
+            response = send_confirmation_code(
+                receiver_phone)
+            return Response({
+                'status': response['success'],
+                'message': response['message'],
+                'data': {
+                    'phone': receiver_phone
+                }
+            }, status=status.HTTP_200_OK)
+
+        return Response({'status': False, 'message': "No one is registered by this phone number"})
+
+
+class ChangePasswordApiView(APIView):
+    serialize_class = ChangePasswordSerializer
+    permission_classes = (AllowAny, )
+
+    def post(self, request):
+        serializer = self.serialize_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+        if valid:
+            # change password
+            serializer.save()
+
+            # create access_token
+            user = Users.objects.get(phone=request.data['phone'])
+            refresh = RefreshToken.for_user(user)
+            refresh_token = str(refresh)
+            access_token = str(refresh.access_token)
+            return Response({'status': True, 'message': "Password changed successfully", 'data': {
+                'refresh': str(refresh_token), 'access_token': str(
+                    access_token)
+            }}, status=status.HTTP_200_OK)
+        return Response({'status': False, 'message': "No one is registered by this phone"}, status=status.HTTP_403_FORBIDDEN)
 
 
 class UserListView(APIView):

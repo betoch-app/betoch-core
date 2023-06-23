@@ -9,8 +9,16 @@ type Props = {
   intl: IntlShape;
   onAccountRecovery: (values: any) => void;
   loading: boolean;
+  error: boolean;
+  errorMessage: string;
 };
-const ForgotPasswordPage = ({ intl, onAccountRecovery, loading }: Props) => {
+const ForgotPasswordPage = ({
+  intl,
+  onAccountRecovery,
+  loading,
+  error,
+  errorMessage,
+}: Props) => {
   const [forgotPasswordForm] = Form.useForm();
   const { accountRecovery, subTitle, submit } = localeForgotPassword(intl);
   const { phoneLabel, phoneError, backToSignInText } = localeSignUpPage(intl);
@@ -50,7 +58,7 @@ const ForgotPasswordPage = ({ intl, onAccountRecovery, loading }: Props) => {
                   />
                 </Form.Item>
               </div>
-
+              <span className="text-red-500">{errorMessage}</span>
               <div className="mt-10 text-center login-btn-container">
                 <Button
                   id="forgot_submit"

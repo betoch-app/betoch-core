@@ -3,14 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import languageSlice from "../slices/languagesSlice";
 import organizationSlice from "../../authentication/slice/organizationSlice";
 import smsSlice from "../../authentication/slice/smsSlice";
-import signUpSlice from "../../authentication/slice/signUpSlice";
 import OTPSlice from "../../authentication/slice/OTPSlice";
+import authenticationSlice from "../../authentication/slice/authenticationSlice";
 const store = configureStore({
   reducer: {
     languageSlice,
     organizationSlice,
     smsSlice,
-    signUpSlice,
+    authenticationSlice,
     OTPSlice,
   },
 });
