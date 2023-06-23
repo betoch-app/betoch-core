@@ -9,7 +9,7 @@ class BranchDetails(APIView):
     #Get all Branches
     def get(self,request,format=None):
         branch=Branch.objects.all()
-        serializer=branchSerializer(branch,Many=True)
+        serializer=branchSerializer(branch,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
     #Create Branches
     def post(self,request,format=None):

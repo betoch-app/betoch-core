@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import django
 import environ
 from datetime import timedelta
 
@@ -28,6 +29,7 @@ SECRET_KEY = env('JWT_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#APPEND_SLASH=False
 
 ALLOWED_HOSTS = []
 
@@ -50,7 +52,8 @@ INSTALLED_APPS = [
     'house',
     'room',
     'penality',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'django_api_admin'
 ]
 
 

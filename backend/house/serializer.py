@@ -5,6 +5,6 @@ from .models import House
 class houseSerializer(serializers.ModelSerializer):
     class Meta:
         model=House
-        fields=['company','branch','floorNumebr','rentPrice','peymentTerm','contratEvidenc','has_room']
+        fields=['__all__']
         
         

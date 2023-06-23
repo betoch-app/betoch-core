@@ -1,6 +1,5 @@
 from rest_framework.views import exception_handler
 
-
 def custom_exception_handler(exc, context):
     handlers = {
         'ValidationError': _handle_generic_error,

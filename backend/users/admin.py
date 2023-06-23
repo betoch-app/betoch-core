@@ -29,5 +29,5 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
-#admin.site.register(Users, CustomUserAdmin)
+admin.site.register(Users, CustomUserAdmin)
 #admin.site.register(Company)

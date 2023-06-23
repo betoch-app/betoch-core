@@ -1,8 +1,11 @@
+from django.http import Http404
 from .models import Company
 from .serializers import companySerializers
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from django.views.decorators.csrf import csrf_exempt
+
 #from rest_framework import permissions
 
 #Get all Company Details and Create
@@ -32,13 +35,15 @@ class companyList(APIView):
             try:
                 return Company.objects.get(pk=pk)
             except Company.DoesNotExist:
-                return Response(status=status.HTTP_404_NOT_FOUND)
+                raise Http404
         #Get Company by Id
+        @csrf_exempt
         def get(self,request,pk,format=None):
             company=self.get_object(pk)
             serializer=companySerializers(company)       
             return Response(serializer.data,status=status.HTTP_200_OK)
             #Update Company
+        @csrf_exempt
         def put(self,request,pk):
             company=self.get_object(pk)
             serializer=companySerializers(company,data=request.data)
@@ -47,6 +52,7 @@ class companyList(APIView):
                 return Response(serializer.data,status=status.HTTP_200_OK)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
             #Delete Company
+        @csrf_exempt    
         def delete(self,request,pk,format=None):
         
             company=self.get_object(pk)
