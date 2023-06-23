@@ -1,91 +1,49 @@
+import AuthenticationHOC from "../../HOC/AuthenticationHOC";
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { IResetPassword } from "../../models/ResetPassword";
 import { IntlShape, injectIntl } from "react-intl";
-import { localeSignUpPage } from "../../pages/SignUpPage/localeSignUpPage";
+import { localResetPassword } from "./localeResetPassword";
+import { localeSignUpPage } from "../SignUpPage/localeSignUpPage";
 type Props = {
   intl: IntlShape;
-  onSignUp: (values: any) => void;
+  onReset: (values: IResetPassword) => void;
   loading: boolean;
   error: boolean;
-  errorMessage: string;
+  message: string;
 };
-export const SignUp = ({
+const ResetPasswordPage = ({
   intl,
-  onSignUp,
+  onReset,
   loading,
   error,
-  errorMessage,
+  message,
 }: Props) => {
-  const [signUpForm] = Form.useForm();
+  const [resetPasswordForm] = Form.useForm();
+
   const {
-    signUpTitle,
-    fullNameLabel,
-    fullNamePlaceholder,
-    fullNameError,
-    phoneLabel,
-    phoneError,
-    password,
-    passwordError,
-    confirmPassword,
-    confirmPasswordError,
-    signUpBtnText,
-    backToSignInText,
-  } = localeSignUpPage(intl);
+    resetTitle,
+    newPassword,
+    newPasswordPlaceholder,
+    confirmNewPasswordPlaceholder,
+    confirmNewPassword,
+    submitButtonText,
+  } = localResetPassword(intl);
+  const { passwordError, confirmPasswordError } = localeSignUpPage(intl);
   return (
-    <div>
-      <span className="font-medium text-gray-900 text-2xl">{signUpTitle}</span>
-      <div className="mt-10">
-        <Form
-          onFinish={onSignUp}
-          form={signUpForm}
-          layout="vertical"
-          requiredMark={false}
-        >
-          <div>
-            <div className="mb-2">
-              <Form.Item
-                name="full_name"
-                label={fullNameLabel}
-                rules={[
-                  {
-                    required: true,
-                    message: `${fullNameError}`,
-                  },
-                ]}
-              >
-                <Input
-                  autoComplete="off"
-                  type="text"
-                  placeholder={fullNamePlaceholder}
-                  name="full_name"
-                />
-              </Form.Item>
-            </div>
-
-            <div className="mb-2">
-              <Form.Item
-                name="phone"
-                label={phoneLabel}
-                rules={[
-                  {
-                    required: true,
-                    message: `${phoneError}`,
-                  },
-                ]}
-              >
-                <Input
-                  autoComplete="phone"
-                  type="phone"
-                  placeholder={phoneLabel}
-                  name="phone"
-                />
-              </Form.Item>
-            </div>
-
+    <AuthenticationHOC>
+      <div>
+        <span className="font-medium text-gray-900 text-2xl">{resetTitle}</span>
+        <div className="mt-10">
+          <Form
+            onFinish={onReset}
+            form={resetPasswordForm}
+            layout="vertical"
+            requiredMark={false}
+          >
             <div className="mb-2">
               <Form.Item
                 name="password"
-                label={password}
+                label={newPassword}
                 rules={[
                   {
                     required: true,
@@ -95,7 +53,7 @@ export const SignUp = ({
               >
                 <Input
                   type={"password"}
-                  placeholder={password}
+                  placeholder={newPasswordPlaceholder}
                   name="password"
                 />
               </Form.Item>
@@ -104,7 +62,7 @@ export const SignUp = ({
             <div className="mb-2">
               <Form.Item
                 name="confirmPassword"
-                label={confirmPassword}
+                label={confirmNewPassword}
                 dependencies={["password"]}
                 rules={[
                   {
@@ -125,14 +83,12 @@ export const SignUp = ({
               >
                 <Input
                   type={"password"}
-                  placeholder={confirmPassword}
+                  placeholder={confirmNewPasswordPlaceholder}
                   name="confirmPassword"
                 />
               </Form.Item>
             </div>
-            <div>
-              <span className="text-red-500">{errorMessage}</span>
-            </div>
+            <span className="text-red-500">{message}</span>
             <div className="mt-10 text-center">
               <Button
                 id="submit"
@@ -169,23 +125,19 @@ export const SignUp = ({
                         values="0 50 50;360 50 50"
                         keyTimes="0;1"
                       >
-                        <span>{signUpBtnText}</span>
+                        <span>{submitButtonText}</span>
                       </animateTransform>
                     </circle>
                   </svg>
                 ) : null}
-                <span>{signUpBtnText}</span>
+                <span>{submitButtonText}</span>
               </Button>
             </div>
-
-            <div className="flex justify-end mt-6 forgot-link">
-              <Link to={"/"}>{backToSignInText}</Link>
-            </div>
-          </div>
-        </Form>
+          </Form>
+        </div>
       </div>
-    </div>
+    </AuthenticationHOC>
   );
 };
 
-export default injectIntl(SignUp);
+export default injectIntl(ResetPasswordPage);

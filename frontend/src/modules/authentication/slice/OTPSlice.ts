@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { IOType } from "child_process";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IHttpResponse } from "./model/HttpResponse";
 import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
@@ -23,10 +22,28 @@ export const OTPConfirmation = createAsyncThunk(
   }
 );
 
+export const sendOTPCOde = createAsyncThunk(
+  "api/auth/sendOTPCode",
+  async (data: IOtp) => {
+    const response = await httpService.post(
+      `${BASE_URL}auth/sendOTPCode`,
+      data
+    );
+    return response.data;
+  }
+);
+
 const otpSlice = createSlice({
   name: "OTPConfirmation",
   initialState,
-  reducers: {},
+  reducers: {
+    clearInitialState(state) {
+      state.data = "" || {};
+      state.error = false;
+      state.success = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(OTPConfirmation.pending, (state) => {
@@ -35,13 +52,29 @@ const otpSlice = createSlice({
       .addCase(OTPConfirmation.fulfilled, (state, action) => {
         state.success = true;
         state.message = action.payload?.message;
+        state.data = action.payload?.data;
       })
       .addCase(OTPConfirmation.rejected, (state) => {
         state.message = "Something is not good ):";
         state.success = false;
         state.error = true;
+      })
+      .addCase(sendOTPCOde.pending, (state) => {
+        state.success = false;
+      })
+      .addCase(sendOTPCOde.fulfilled, (state, action) => {
+        state.success = true;
+        state.error = false;
+        state.data = action.payload?.data;
+        state.message = action.payload?.message;
+      })
+      .addCase(sendOTPCOde.rejected, (state) => {
+        state.success = false;
+        state.message = "Something is not good ): ";
+        state.error = true;
       });
   },
 });
 
+export const { clearInitialState } = otpSlice.actions;
 export default otpSlice.reducer;

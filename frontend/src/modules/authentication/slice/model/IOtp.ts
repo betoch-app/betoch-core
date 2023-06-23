@@ -1,4 +1,4 @@
 export interface IOtp {
-  code: number;
+  code?: number;
   receiver_phone: string;
 }

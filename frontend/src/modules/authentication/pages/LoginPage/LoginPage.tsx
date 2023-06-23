@@ -80,7 +80,7 @@ const LoginPage = ({ intl, onLogin, loading }: Props) => {
               </div>
 
               <div className="flex justify-start justify-between items-center">
-                <Link to={"/forgot-password"} className="forgot-link">
+                <Link to={"/forgotPassword"} className="forgot-link">
                   {forgotPassword}
                 </Link>
                 <Link to={"/signUp"} className="forgot-link font-bold">

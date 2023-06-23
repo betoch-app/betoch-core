@@ -28,7 +28,13 @@
     "authentication.forgotPassword.title":"Account recovery",
     "authentication.forgotPassword.subTitle":"Enter your Phone number associated with your Kiray Kifiya account.",
     "authentication.forgotPassword.submit":"Submit",
-    "authentication.otp.confirmationTitle":"We have sent you a confirmation code to your phone by {phone} phone number"
+    "authentication.otp.confirmationTitle":"We have sent you a confirmation code to your phone by {phone} phone number",
+    "authentication.resetPassword.newPassword":"New Password",
+    "authentication.resetPassword.newPasswordPlaceholder":"Enter your new password",
+    "authentication.resetPassword.confirmNewPassword":"Confirm new password",
+    "authentication.resetPassword.confirmationPasswordPlaceholder":"Confirm new password",
+    "authentication.resetPassword.resetButtonText":"Change my password",
+    "authentication.resetPassword.title":"Reset your Kiray Kifiya account"
   },
 
   "am-ET": {
@@ -60,7 +66,12 @@
     "authentication.forgotPassword.title":"አካውንትዎን መልሰው ለማግኘት",
     "authentication.forgotPassword.subTitle":"ከክራይ ክፊያ መለያ ጋር የተገናኘውን ስልክ ቁጥርዎን ያስገቡ",
     "authentication.forgotPassword.submit":"አስገባ",
-    "authentication.otp.confirmationTitle":"የአካውንት ማርጋገጫ መልዕክቱን  በ{phone} በሚጀምር ስልክ ቁጥር ወደ እርስዎ ስልክ ቁጥር ልከንለዎታል።"
-
+    "authentication.otp.confirmationTitle":"የአካውንት ማርጋገጫ መልዕክቱን  በ{phone} በሚጀምር ስልክ ቁጥር ወደ እርስዎ ስልክ ቁጥር ልከንለዎታል።",
+    "authentication.resetPassword.newPassword":"አድስ የይልፍ ቃል",
+    "authentication.resetPassword.newPasswordPlaceholder":"አድስ የይልፍ ቃል ያስገቡ",
+    "authentication.resetPassword.confirmNewPassword":"አድሱን የይለፍ ቃል እንደገና ያስገቡ",
+    "authentication.resetPassword.confirmationPasswordPlaceholder":"አድሱን የይለፍ ቃል እንደገና አስገብተው ያረጋገጡ",
+    "authentication.resetPassword.resetButtonText":"የይለፍ ቃሌን ቀይር",
+    "authentication.resetPassword.title":"የክራይ ክፍያ አካውንትዎን ይቀይሩ"
   }
 }
