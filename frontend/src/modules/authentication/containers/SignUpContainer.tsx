@@ -1,12 +1,18 @@
 import { useState } from "react";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import { useAppDispatch } from "../../core/hooks/redux-hooks";
+import { ISignUp } from "../models/SignUp";
+import { signUp } from "../slice/authenticationSlice";
 
 const SignUpContainer = () => {
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const onSignUp = (values: any) => {
+
+  const onSignUp = (values: ISignUp) => {
+    dispatch(signUp(values));
     setLoading(true);
-    console.log(values);
   };
+
   return <SignUpPage onSignUp={onSignUp} loading={loading} />;
 };
 

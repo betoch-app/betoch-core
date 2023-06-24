@@ -17,7 +17,9 @@ const AuthenticationHOC = ({ children }: Props) => {
           <LanguageSwitcher />
         </div>
         <div className="flex justify-center items-center h-screen">
-          {children}
+          <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20 ">
+            {children}
+          </div>
         </div>
       </div>
     </div>

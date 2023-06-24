@@ -28,7 +28,7 @@ const LoginPage = ({ intl, onLogin, loading }: Props) => {
 
   return (
     <AuthenticationHOC>
-      <div className="relative mx-6 md:mx-auto w-full md:w-1/2 lg:w-96 z-20 ">
+      <div>
         <span className="font-medium text-gray-900 text-2xl">
           {signInTitle}
         </span>
@@ -80,7 +80,7 @@ const LoginPage = ({ intl, onLogin, loading }: Props) => {
               </div>
 
               <div className="flex justify-start justify-between items-center">
-                <Link to={"/forgot-password"} className="forgot-link">
+                <Link to={"/forgotPassword"} className="forgot-link">
                   {forgotPassword}
                 </Link>
                 <Link to={"/signUp"} className="forgot-link font-bold">

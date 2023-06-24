@@ -55,6 +55,36 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Invalid login credentials")
 
 
+class SendOTPSerializer():
+    class Meta:
+        model = Users
+        fields = ('phone')
+
+
+class ChangePasswordSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField(max_length=15)
+    password = serializers.CharField(max_length=100)
+
+    class Meta:
+        model = Users
+        fields = ('phone', 'password')
+
+    def save(self):
+        phone = self.validated_data['phone']
+        password = self.validated_data['password']
+        # filtering out whether User is existing or not, if your username is existing then if condition will allow your username
+        if Users.objects.filter(phone=phone).exists():
+            # if your phone is existing get the query of your specific username
+            user = Users.objects.get(phone=phone)
+            # then set the new password for your username
+            user.set_password(password)
+            user.save()
+            return user
+        else:
+            raise serializers.ValidationError(
+                {'error': 'please enter valid crendentials'})
+
+
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
