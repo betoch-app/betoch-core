@@ -8,6 +8,8 @@ import OTPConfirmation from "../../components/OTP/OTPConfirmation";
 import { clearInitialState } from "../../slice/OTPSlice";
 import { useNavigate } from "react-router-dom";
 import { OTPType } from "../../components/OTP/OTPType";
+import { storeToken } from "../../../core/services/token.service";
+import { changeApplication } from "../../../core/slices/applicationsSlice";
 type Props = {
   onOTPConfirmation: (values: any) => void;
   loading: boolean;
@@ -20,20 +22,29 @@ const OTPConfirmationPage = ({
   confirmationType,
   urlState,
 }: Props) => {
-  const { success, message, error, data } = useAppSelector(
-    (state) => state.OTPSlice
-  );
+  const { success, error, data } = useAppSelector((state) => state.OTPSlice);
   const navigate = useNavigate();
+  const { access_token, refresh_token, role } = data;
+  const dispatch = useAppDispatch();
 
   const navigateToNextStep = () => {
     if (confirmationType === OTPType.AccountReset) {
       navigate("/resetPassword", { state: urlState });
+    }
+
+    if (confirmationType === OTPType.AccountConfirmation) {
+      dispatch(changeApplication(role.toString()));
+      storeToken(access_token, refresh_token, role.toString());
     }
   };
   useEffect(() => {
     if (success) {
       navigateToNextStep();
     }
+
+    return () => {
+      dispatch(clearInitialState());
+    };
   }, [success]);
 
   return (

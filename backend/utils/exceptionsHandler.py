@@ -1,9 +1,10 @@
 from rest_framework.views import exception_handler
+import datetime
 
 
 def custom_exception_handler(exc, context):
     handlers = {
-        'ValidationError': _handle_generic_error,
+        'ValidationError': _handle_validation_error,
         'Http404': _handle_generic_error,
         'PermissionDenied': _handle_generic_error,
         'NotAuthenticated': _handle_authentication_error
@@ -31,4 +32,8 @@ def _handle_generic_error(exc, context, response):
         'message': 'Something is not good'
     }
 
+    return response
+
+
+def _handle_validation_error(exc, context, response):
     return response

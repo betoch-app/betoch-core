@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Users
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import update_last_login
@@ -85,7 +84,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
                 {'error': 'please enter valid crendentials'})
 
 
-class UserListSerializer(serializers.ModelSerializer):
+class MeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('full_name', 'phone', 'role')
+        fields = ('full_name', 'phone')

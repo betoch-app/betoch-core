@@ -4,7 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import (UserRegistrationSerializer, SendOTPSerializer,
-                          UserLoginSerializer, ChangePasswordSerializer, UserListSerializer)
+                          UserLoginSerializer, ChangePasswordSerializer, MeSerializer)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 from .models import Users
@@ -47,15 +47,18 @@ class AuthUserLoginView(APIView):
             status_code = status.HTTP_200_OK
             response = {
                 "success": True,
-                "access_token": serializer.data['access_token'],
-                "refresh_token": serializer.data['refresh_token'],
-                "user": {
-                    "phone": serializer.data['phone'],
+                "data": {
+                    "access_token": serializer.data['access_token'],
+                    "refresh_token": serializer.data['refresh_token'],
                     "role": serializer.data['role']
                 }
             }
 
             return Response(response, status=status_code)
+        errors = {}
+        for field_name, field_errors in serializer.errors.items():
+            errors[field_name] = field_errors[0]
+        return Response(errors, status=status.HTTP_403_FORBIDDEN)
 
 
 class OTPConfirmationView(APIView):
@@ -74,8 +77,10 @@ class OTPConfirmationView(APIView):
                 'status': SMS_API_response['status'],
                 'message': SMS_API_response['message'],
                 'data': {
-                    'refresh': str(refresh_token), 'access_token': str(
-                        refresh_token.access_token)
+                    'refresh_token': str(refresh_token),
+                    'access_token': str(
+                        refresh_token.access_token),
+                    'role': user.role
                 }
             }, status=status.HTTP_200_OK)
 
@@ -119,31 +124,19 @@ class ChangePasswordApiView(APIView):
             refresh = RefreshToken.for_user(user)
             refresh_token = str(refresh)
             access_token = str(refresh.access_token)
-            return Response({'status': True, 'message': "Password changed successfully", 'data': {
-                'refresh': str(refresh_token), 'access_token': str(
-                    access_token)
-            }}, status=status.HTTP_200_OK)
+            return Response({'status': True, 'message': "Password changed successfully",
+                             'data': {
+                                 'refresh_token': str(refresh_token), 'access_token': str(
+                                     access_token),
+                                 'role': user.role
+                             }}, status=status.HTTP_200_OK)
         return Response({'status': False, 'message': "No one is registered by this phone"}, status=status.HTTP_403_FORBIDDEN)
 
 
-class UserListView(APIView):
-    serializer_class = UserListSerializer
+class MeAPIView(APIView):
+    serialize_class = MeSerializer
     permission_classes = (IsAuthenticated, )
 
     def get(self, request):
-        user = request.user
-        if user.role != 1:
-            response = {
-                'success': False,
-                'status_code': status.HTTP_403_FORBIDDEN,
-                'message': 'You are not authorized to perform this action'
-            }
-            return Response(response, status=status.HTTP_403_FORBIDDEN)
-        else:
-            users = Users.objects.all()
-            serializer = self.serializer_class(users, many=True)
-            response = {
-                'users': serializer.data
-            }
-
-            return Response(response, status=status.HTTP_200_OK)
+        serializer = self.serialize_class(request.user)
+        return Response({'data': serializer.data}, status=status.HTTP_200_OK)

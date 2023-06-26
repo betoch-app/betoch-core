@@ -4,11 +4,16 @@ import { ISignUp } from "../models/SignUp";
 import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
 import { IResetPassword } from "../models/ResetPassword";
+import { ILogin } from "./model/Login";
 
 const initialState: IHttpResponse = {
   success: false,
   message: "",
-  data: "" || {},
+  data: {
+    access_token: "",
+    refresh_token: "",
+    role: 0,
+  },
   error: false,
 };
 
@@ -20,13 +25,22 @@ export const signUp = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk(
+  "api/auth/login",
+  async (data: ILogin) => {
+    const response = await httpService.post(`${BASE_URL}auth/login`, data);
+    return response.data;
+  }
+);
+
 export const resetPassword = createAsyncThunk(
   "api/auth/resetPasword",
   async (data: IResetPassword) => {
-    const response = await httpService.post(
-      `${BASE_URL}auth/resetPassword`,
-      data
-    );
+    const response = await httpService
+      .post(`${BASE_URL}auth/resetPassword`, data)
+      .catch((error) => {
+        return error;
+      });
     return response.data;
   }
 );
@@ -39,7 +53,6 @@ const authenticationSlice = createSlice({
       state.success = false;
       state.error = false;
       state.message = "";
-      state.data = "" || {};
     },
   },
   extraReducers: (builder) => {
@@ -71,7 +84,22 @@ const authenticationSlice = createSlice({
       .addCase(resetPassword.rejected, (state) => {
         state.error = false;
         state.message = "Something is not good ):";
-        state.data = {};
+        state.success = false;
+      })
+      // login
+      .addCase(login.pending, (state) => {
+        state.success = false;
+        state.error = false;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.data = action.payload?.data;
+        state.message = action.payload?.message;
+        state.error = false;
+        state.success = true;
+      })
+      .addCase(login.rejected, (state) => {
+        state.error = true;
+        state.message = "Invalid credentials";
         state.success = false;
       });
   },
