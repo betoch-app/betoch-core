@@ -10,6 +10,10 @@ export const SELECTED_LANGUAGE: string = "SELECTED_LANGUAGE";
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
+export const ACCESS_TOKEN = "access_token";
+export const REFRESH_TOKEN = "refresh_token";
+export const CURRENT_ROLE = "current_role";
+
 export const CURRENT_SELECETED_LANGUAGE = {
   name: "English",
   languageCode: "EN",
@@ -34,6 +38,11 @@ export const getCurrentSelectedLanguage = () => {
   return isCurrentSelectedLanguageEmpty(selectedLanguageFromLocalStorage)
     ? CURRENT_SELECETED_LANGUAGE
     : selectedLanguageFromLocalStorage;
+};
+
+export const getCurrentApplications = () => {
+  const currentRole = localStorage.getItem(CURRENT_ROLE);
+  return currentRole === undefined ? "0" : currentRole;
 };
 
 export const imagesData = [

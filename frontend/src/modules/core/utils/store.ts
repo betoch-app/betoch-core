@@ -5,13 +5,17 @@ import organizationSlice from "../../authentication/slice/organizationSlice";
 import smsSlice from "../../authentication/slice/smsSlice";
 import OTPSlice from "../../authentication/slice/OTPSlice";
 import authenticationSlice from "../../authentication/slice/authenticationSlice";
+import applicationsSlice from "../slices/applicationsSlice";
+import userSlice from "../../common/slice/userSlice";
 const store = configureStore({
   reducer: {
+    applicationsSlice,
     languageSlice,
     organizationSlice,
     smsSlice,
     authenticationSlice,
     OTPSlice,
+    userSlice,
   },
 });
 

@@ -9,8 +9,9 @@ type Props = {
   intl: IntlShape;
   onLogin: (values: any) => void;
   loading: boolean;
+  message: string;
 };
-const LoginPage = ({ intl, onLogin, loading }: Props) => {
+const LoginPage = ({ intl, onLogin, loading, message }: Props) => {
   const [loginForm] = Form.useForm();
   const {
     signInTitle,
@@ -87,6 +88,7 @@ const LoginPage = ({ intl, onLogin, loading }: Props) => {
                   {createNewAccount}
                 </Link>
               </div>
+              <span>{message}</span>
               <div className="mt-10 text-center">
                 <Button
                   id="submit"
