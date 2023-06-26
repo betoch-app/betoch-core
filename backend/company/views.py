@@ -6,11 +6,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 
-#from rest_framework import permissions
+from rest_framework import permissions
 
 #Get all Company Details and Create
 #@api_view(['GET','POST'])
 class companyDetail(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     http_method_names = ['get', 'head', 'post']
 
     #Get All Company
@@ -29,7 +31,7 @@ class companyDetail(APIView):
         #Update Company
         #Delete Company
 class companyList(APIView):
-    #permission_classes = [permissions.IsAuthenticated]
+        permission_classes = [permissions.IsAuthenticated]
         http_method_names = ['get', 'head', 'put','delete']
         def get_object(self, pk):
             try:
