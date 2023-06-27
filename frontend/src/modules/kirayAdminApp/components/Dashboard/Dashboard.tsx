@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import DashboardHOC from "../../../common/DashboardHOC/DashboardHOC";
+import DashboardHOC from "../../../common/HOC/DashboardHOC/DashboardHOC";
 import { menus } from "../../utils/menus";
 import KirayAdminHeader from "../Header/Header";
 

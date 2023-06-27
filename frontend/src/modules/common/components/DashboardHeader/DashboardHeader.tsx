@@ -1,6 +1,6 @@
 import { theme as themeToken } from "antd";
 import { ReactNode } from "react";
-import Logo from "../../core/views/components/Logo/Logo";
+import Logo from "../../../core/views/components/Logo/Logo";
 
 type Props = {
   headerComponent: ReactNode;
