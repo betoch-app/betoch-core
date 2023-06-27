@@ -8,5 +8,5 @@ ENV/
 *.pyc
 __pycache__
 pip-log.txt
-migrations/
+migrations
 .idea
