@@ -5,6 +5,8 @@ build/
 .venv
 venv/
 ENV/
+*.pyc
 __pycache__/
 pip-log.txt
 migrations/
+.idea/
