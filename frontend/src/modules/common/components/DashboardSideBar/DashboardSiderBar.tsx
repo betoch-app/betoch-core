@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import { IMenu } from "../model/IMenu";
+import { IMenu } from "../../model/IMenu";
 import Profile from "../Profile/Profile";
 import Menu from "../Menu/Menu";
 type Props = {

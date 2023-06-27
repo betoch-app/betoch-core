@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import DashboardSideBar from "../DashboardSideBar/DashboardSiderBar";
-import { IMenu } from "../model/IMenu";
+import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
+import DashboardSideBar from "../../components/DashboardSideBar/DashboardSiderBar";
+import { IMenu } from "../../model/IMenu";
 
 type Props = {
   sideBarMenus: IMenu[];

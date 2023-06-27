@@ -1,1 +1,10 @@
 node_modules/
+.Python
+build/
+.env
+.venv
+venv/
+ENV/
+__pycache__/
+pip-log.txt
+migrations/
