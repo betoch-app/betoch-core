@@ -9,4 +9,4 @@ ENV/
 __pycache__/
 pip-log.txt
 migrations/
-.idea/
+.idea
