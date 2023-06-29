@@ -7,7 +7,11 @@ import { IOtp } from "./model/IOtp";
 const initialState: IHttpResponse = {
   success: false,
   message: "",
-  data: {},
+  data: {
+    access_token: "",
+    refresh_token: "",
+    role: 0,
+  },
   error: false,
 };
 
@@ -38,7 +42,6 @@ const otpSlice = createSlice({
   initialState,
   reducers: {
     clearInitialState(state) {
-      state.data = "" || {};
       state.error = false;
       state.success = false;
       state.message = "";

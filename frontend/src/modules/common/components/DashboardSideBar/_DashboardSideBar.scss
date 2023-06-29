@@ -1,0 +1,9 @@
+.dashboard-sidebar-container {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  .divider {
+    box-shadow: 0 4px 4px RGB(0 0 0 / 10%);
+  }
+}

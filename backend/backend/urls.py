@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users.views import MeAPIView
+from rest_framework_simplejwt import views as jwt_views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
@@ -24,7 +26,10 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/', include('users.urls')),
+    path("api/auth/", include('users.urls')),
+    path('api/token/refresh', jwt_views.TokenRefreshView.as_view(),
+         name='token_refresh'),
+    path("api/me", MeAPIView.as_view(),
     #company Api
     path('api/company/',include('company.urls')),
     #branch Api
@@ -45,7 +50,6 @@ urlpatterns = [
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui')
 
-    
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
 

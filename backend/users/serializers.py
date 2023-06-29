@@ -85,7 +85,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
                 {'error': 'please enter valid crendentials'})
 
 
-class UserListSerializer(serializers.ModelSerializer):
+class MeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('full_name', 'phone', 'role')
+        fields = ('full_name', 'phone')
