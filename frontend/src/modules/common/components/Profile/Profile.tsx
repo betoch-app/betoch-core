@@ -12,7 +12,7 @@ type Props = {
 const Profile = ({ type = "avatar" }: Props) => {
   const { useToken } = themeToken;
   const { token: theme } = useToken();
-  const { status, data } = useAppSelector((state) => state.userSlice);
+  const { loading, data } = useAppSelector((state) => state.userSlice);
   const { full_name } = data;
 
   // Find first letters of full name to
@@ -26,7 +26,7 @@ const Profile = ({ type = "avatar" }: Props) => {
     dispatch(getMe());
   }, []);
 
-  if (!status) {
+  if (loading) {
     return <span>Loading...</span>;
   }
 

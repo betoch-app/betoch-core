@@ -5,7 +5,7 @@ export interface IUser {
 
 export interface IUserResponse {
   loading: boolean;
-  status: boolean;
+  success: boolean;
   error: boolean;
   data: IUser;
 }
