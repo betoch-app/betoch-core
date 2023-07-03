@@ -30,7 +30,7 @@ urlpatterns = [
          name='token_refresh'),
     path("api/me", MeAPIView.as_view()),
     # company Api
-    path('api/company/', include('company.urls')),
+    path('api/company', include('company.urls')),
     # branch Api
     path('api/branch/', include('branch.urls')),
     # House APi

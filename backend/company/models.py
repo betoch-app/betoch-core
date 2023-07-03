@@ -3,10 +3,10 @@ from users.models import Users
 
 
 class Company(models.Model):
-    owner = models.OneToOneField(
+    owner = models.ForeignKey(
         Users,
-        on_delete=models.PROTECT,
-        primary_key=True
+        on_delete=models.CASCADE,
+        related_name='owner_id'
     )
     company_Name = models.CharField(max_length=100)
     company_Logo = models.ImageField(max_length=100, null=True, blank=True)

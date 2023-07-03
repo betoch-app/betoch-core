@@ -6,17 +6,23 @@ import {
   clearAuthenticationInitialState,
   resetPassword,
 } from "../slice/authenticationSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { storeToken } from "../../core/services/token.service";
+import { changeApplication } from "../../core/slices/applicationsSlice";
 
 const ResetPasswordContainer = () => {
   const { state } = useLocation();
   const { phone } = state;
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const { success, error, message } = useAppSelector(
+  const navigate = useNavigate();
+  const { success, error, message, data } = useAppSelector(
     (state) => state.authenticationSlice
   );
+  const { access_token, refresh_token, role } = data;
+
   const onReset = (values: IResetPassword) => {
+    setLoading(true);
     const formData: IResetPassword = {
       password: values.password,
       phone: phone,
@@ -26,6 +32,9 @@ const ResetPasswordContainer = () => {
 
   useEffect(() => {
     if (success) {
+      storeToken(access_token, refresh_token, role.toString());
+      dispatch(changeApplication(role.toString()));
+      navigate("/");
     }
 
     return () => {

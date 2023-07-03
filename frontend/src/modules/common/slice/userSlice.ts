@@ -9,6 +9,7 @@ const initialState: IUserResponse = {
   data: {
     full_name: "",
     phone: "",
+    company: [],
   },
   error: false,
 };

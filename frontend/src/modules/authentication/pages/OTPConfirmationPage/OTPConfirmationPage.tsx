@@ -33,9 +33,9 @@ const OTPConfirmationPage = ({
     }
 
     if (confirmationType === OTPType.AccountConfirmation) {
+      storeToken(access_token, refresh_token, role.toString());
       dispatch(changeApplication(role.toString()));
       navigate("/");
-      storeToken(access_token, refresh_token, role.toString());
     }
   };
   useEffect(() => {
