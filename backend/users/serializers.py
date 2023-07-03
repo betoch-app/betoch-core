@@ -3,7 +3,7 @@ from .models import Users
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import update_last_login
-
+from company.serializers import companySerializers
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -42,12 +42,12 @@ class UserLoginSerializer(serializers.Serializer):
             refresh = RefreshToken.for_user(user)
             refresh_token = str(refresh)
             access_token = str(refresh.access_token)
-            update_last_login(user) # type: ignore
+            update_last_login(user)  # type: ignore
             validation = {
                 'access_token': access_token,
                 'refresh_token': refresh_token,
                 'phone': phone,
-                'password':password
+                'password': password
             }
 
             return validation
@@ -86,6 +86,14 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
 
 class MeSerializer(serializers.ModelSerializer):
+    company = companySerializers(source='owner_id', many=True)
+
+    class Meta:
+        model = Users
+        fields = ('full_name', 'phone', 'company')
+
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('full_name', 'phone')

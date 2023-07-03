@@ -23,33 +23,31 @@ from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/auth/", include('users.urls')),
     path('api/token/refresh', jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),
     path("api/me", MeAPIView.as_view()),
-    #company Api
-    path('api/company/',include('company.urls')),
-    #branch Api
-    path('api/branch/',include('branch.urls')),
-    #House APi
-    path('api/house/',include('house.urls')),
-    #Room api
-    path('api/room/',include('room.urls')),
-    #penality Api
-    path('api/penality/',include('penality.urls')),
-    #api documentation
+    # company Api
+    path('api/company', include('company.urls')),
+    # branch Api
+    path('api/branch/', include('branch.urls')),
+    # House APi
+    path('api/house/', include('house.urls')),
+    # Room api
+    path('api/room/', include('room.urls')),
+    # penality Api
+    path('api/penality/', include('penality.urls')),
+    # api documentation
     path('openapi/', get_schema_view(
         title="Betoch ",
         description="API developers hpoing to use our service"
     ), name='openapi-schema'),
     path('docs/', TemplateView.as_view(
         template_name='documentation.html',
-        extra_context={'schema_url':'openapi-schema'}
+        extra_context={'schema_url': 'openapi-schema'}
     ), name='swagger-ui')
-
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)
 
+urlpatterns = format_suffix_patterns(urlpatterns)
