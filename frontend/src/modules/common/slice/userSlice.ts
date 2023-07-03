@@ -4,8 +4,8 @@ import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
 
 const initialState: IUserResponse = {
-  loading: false,
-  status: false,
+  loading: true,
+  success: false,
   data: {
     full_name: "",
     phone: "",
@@ -21,21 +21,28 @@ export const getMe = createAsyncThunk("api/me", async () => {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    updateState(state) {
+      state.loading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMe.pending, (state) => {
-        state.status = false;
+        state.success = false;
         state.error = false;
+        state.loading = true;
       })
       .addCase(getMe.fulfilled, (state, action) => {
-        state.status = true;
+        state.success = true;
+        state.loading = false;
         state.error = false;
         state.data = action.payload?.data;
       })
       .addCase(getMe.rejected, (state) => {
         state.error = true;
-        state.status = false;
+        state.success = false;
+        state.loading = true;
       });
   },
 });

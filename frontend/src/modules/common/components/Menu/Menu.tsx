@@ -14,7 +14,7 @@ const Menu = ({ name, route, icon }: Props) => {
   };
   return (
     <div
-      className="flex item-center text-lg p-2 w-full menu-container justify-start gap-2 mb-1 cursor-pointer"
+      className="flex items-center text-lg p-2 w-full menu-container justify-start gap-2 mb-1 cursor-pointer"
       onClick={navigateToRoute}
     >
       {icon}
