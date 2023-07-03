@@ -47,7 +47,7 @@ function App() {
     if (currentApplication === null) {
       dispatch(changeApplication("0"));
     }
-  });
+  }, []);
 
   if (currentApplication === "0" || null) {
     router = routerApp;

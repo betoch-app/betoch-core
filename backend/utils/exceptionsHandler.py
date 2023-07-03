@@ -1,7 +1,6 @@
 from rest_framework.views import exception_handler
 import datetime
 
-
 def custom_exception_handler(exc, context):
     handlers = {
         'ValidationError': _handle_validation_error,

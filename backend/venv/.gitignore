@@ -1,0 +1,14 @@
+node_modules/
+compose-dev.yaml
+.idea/
+/migrations/
+.vscode/
+**/__pycache__/
+.jpg
+**/migrations/**
+venv/
+/__pycache__/
+__pycache__/
+/__pycache__/
+
+

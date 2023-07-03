@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import django
 import environ
 from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
@@ -27,6 +29,7 @@ SECRET_KEY = env('JWT_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#APPEND_SLASH=False
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +46,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'users'
+    'users',
+    'company',
+    'branch',
+    'house',
+    'room',
+    'penality',
+    'rest_framework_swagger',
+    'django_api_admin'
 ]
 
 
@@ -166,6 +176,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

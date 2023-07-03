@@ -26,7 +26,7 @@ class Users(AbstractUser, PermissionsMixin):
     role = models.PositiveSmallIntegerField(
         choices=ROLE_CHOICES, blank=True, null=True, default=2)
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ('full_name',)
+    REQUIRED_Fields = ('full_name')
     objects = CustomUserManager()
 
     def __str__(self):
