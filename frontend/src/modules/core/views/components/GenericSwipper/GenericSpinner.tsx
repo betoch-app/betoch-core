@@ -1,4 +1,4 @@
-import SpinnerWrapper from './SpinnerWrapper';
+import SpinnerWrapper from "./SpinnerWrapper";
 
 const GenericSpinner = () => {
   return (
@@ -6,6 +6,7 @@ const GenericSpinner = () => {
       <div className="spinner-event">
         <div className="content">
           <div className="spinner" />
+          <span className="title">Loading...</span>
         </div>
       </div>
     </SpinnerWrapper>
