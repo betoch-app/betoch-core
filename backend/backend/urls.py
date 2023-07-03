@@ -29,7 +29,7 @@ urlpatterns = [
     path("api/auth/", include('users.urls')),
     path('api/token/refresh', jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),
-    path("api/me", MeAPIView.as_view(),
+    path("api/me", MeAPIView.as_view()),
     #company Api
     path('api/company/',include('company.urls')),
     #branch Api

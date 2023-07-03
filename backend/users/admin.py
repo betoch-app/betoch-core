@@ -29,7 +29,3 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(Users, CustomUserAdmin)
-<<<<<<< HEAD
-#admin.site.register(Company)
-=======
->>>>>>> develop
