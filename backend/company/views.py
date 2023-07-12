@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
-
+from renttype.models import RentType
 from rest_framework import permissions
 
 # Get all Company Details and Create
@@ -26,8 +26,11 @@ class companyDetail(APIView):
 
     def post(self, request, format=None):
         serializer = companySerializers(data=request.data)
+        rent_type = RentType.objects.get(id=request.data['rent_type'])
         if serializer.is_valid():
-            serializer.save(owner_id=request.user.id)
+            serializer.save(owner_id=request.user.id,
+                            rent_type=rent_type)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
