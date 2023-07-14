@@ -5,8 +5,9 @@ import {
 } from "../../../core/hooks/redux-hooks";
 import CompanyRegistration from "../../components/CompanyRegistration/CompanyRegistration";
 import { getFirstName, getGreeting } from "../../utils/consts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerCompany } from "../../slice/companySlice";
+import { useNavigate } from "react-router-dom";
 
 const CompanyRegistrationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,16 @@ const CompanyRegistrationPage = () => {
     (state) => state.userSlice
   );
   const { full_name } = data;
+
+  const { success } = useAppSelector((state) => state.companySlice);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (success) {
+      navigate("/");
+    }
+  }, [success]);
 
   const onCompanyRegistration = (values: any) => {
     setLoading(true);

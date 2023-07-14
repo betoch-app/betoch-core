@@ -4,6 +4,7 @@ import { BASE_URL } from "../../core/utils/consts";
 
 const initialState = {
   loading: true,
+  success: false,
   data: {},
   error: false,
 };
@@ -30,10 +31,12 @@ const companySlice = createSlice({
         state.data = action.payload?.data;
         state.loading = false;
         state.error = false;
+        state.success = true;
       })
       .addCase(registerCompany.rejected, (state) => {
         state.error = true;
         state.loading = false;
+        state.success = false;
       });
   },
 });

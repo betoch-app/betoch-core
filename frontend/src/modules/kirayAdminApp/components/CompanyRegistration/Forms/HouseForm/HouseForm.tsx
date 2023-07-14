@@ -25,14 +25,16 @@ const HouseForm = ({ form, loading }: Props) => {
   const [placeholder, setPlaceholder] = useState("");
   const [isRentHavePenalty, setIsRentHavePenalty] = useState(false);
 
+  useEffect(() => {}, [setIsRentHavePenalty]);
   const onHouseTypeSelection = (e: RadioChangeEvent) => {
     const value = e.target.value;
     setHouseType(value);
     setIsHouseTypeSelected(true);
   };
 
-  const onPenaltyChange = () => {
-    setIsRentHavePenalty(!isRentHavePenalty);
+  const onPenaltyChange = (e: RadioChangeEvent) => {
+    const value: boolean = e.target.value;
+    setIsRentHavePenalty(value);
   };
 
   const onPenaltyNumberChange = (value: number | string | null) => {
