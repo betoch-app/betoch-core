@@ -12,7 +12,12 @@ const DashboardSideBar = ({ menus }: Props) => {
         <div className="flex w-full flex-col items-start">
           <Profile />
           {menus.map((menu) => (
-            <Menu icon={menu.icon} name={menu.name} route={menu.route} />
+            <Menu
+              key={menu.route}
+              icon={menu.icon}
+              name={menu.name}
+              route={menu.route}
+            />
           ))}
         </div>
         <Divider type="vertical" className="h-screen ml-0" />

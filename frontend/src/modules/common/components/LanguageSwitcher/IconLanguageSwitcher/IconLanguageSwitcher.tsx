@@ -1,15 +1,22 @@
 import enLanguageIcon from "../../../../../media/images/language_switcher_en.svg";
 import etLanguageIcon from "../../../../../media/images/language_switcher_et.svg";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
-import { changeLanguage } from "../../../slices/languagesSlice";
-const LanguageSwitcher = () => {
-  const currentSelectedLanguage = useAppSelector(
-    (state) => state.languageSlice.currentSelectedLanguage
-  );
-  const supportedLanguages = useAppSelector(
-    (state) => state.languageSlice.supportedLanguages
-  );
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../core/hooks/redux-hooks";
+import { changeLanguage } from "../../../../core/slices/languagesSlice";
+import { ILanguage } from "../../../../core/slices/models/ILanguage.model";
+
+type Props = {
+  activeLanguage: ILanguage;
+  supportedLanguages: ILanguage[];
+};
+const IconLanguageSwitcher = ({
+  activeLanguage,
+  supportedLanguages,
+}: Props) => {
   const dispatch = useAppDispatch();
+
   return (
     <>
       {supportedLanguages.length > 1 && (
@@ -19,15 +26,11 @@ const LanguageSwitcher = () => {
               key={language.code}
               type="button"
               className={`language-btn ${
-                currentSelectedLanguage.code === language.code
-                  ? ""
-                  : "selected-language"
+                activeLanguage.code === language.code ? "" : "selected-language"
               }`}
               style={{
                 backgroundColor: `${
-                  currentSelectedLanguage.code === language.code
-                    ? "#E5E5E5"
-                    : "#FFFFFF"
+                  activeLanguage.code === language.code ? "#E5E5E5" : "#FFFFFF"
                 }`,
               }}
               onClick={() => dispatch(changeLanguage(language))}
@@ -48,4 +51,4 @@ const LanguageSwitcher = () => {
   );
 };
 
-export default LanguageSwitcher;
+export default IconLanguageSwitcher;

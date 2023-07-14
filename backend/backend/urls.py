@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/room/', include('room.urls')),
     # penality Api
     path('api/penality/', include('penality.urls')),
+    path('api/rent_type', include('renttype.urls')),
     # api documentation
     path('openapi/', get_schema_view(
         title="Betoch ",

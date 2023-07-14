@@ -29,7 +29,7 @@ SECRET_KEY = env('JWT_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#APPEND_SLASH=False
+# APPEND_SLASH=False
 
 ALLOWED_HOSTS = []
 
@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'room',
     'penality',
     'rest_framework_swagger',
-    'django_api_admin'
+    'django_api_admin',
+    'renttype'
 ]
 
 
@@ -176,7 +177,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 # Static files (CSS, JavaScript, Images)

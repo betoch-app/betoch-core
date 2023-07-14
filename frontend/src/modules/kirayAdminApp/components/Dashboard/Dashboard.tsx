@@ -6,7 +6,9 @@ import KirayAdminHeader from "../Header/Header";
 const Dashboard = () => {
   return (
     <DashboardHOC sideBarMenus={menus} header={<KirayAdminHeader />}>
-      <Outlet />
+      <div className="p-3">
+        <Outlet />
+      </div>
     </DashboardHOC>
   );
 };

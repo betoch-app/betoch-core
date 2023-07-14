@@ -7,6 +7,7 @@ import OTPSlice from "../../authentication/slice/OTPSlice";
 import authenticationSlice from "../../authentication/slice/authenticationSlice";
 import applicationsSlice from "../slices/applicationsSlice";
 import userSlice from "../../common/slice/userSlice";
+import companySlice from "../../kirayAdminApp/slice/companySlice";
 const store = configureStore({
   reducer: {
     applicationsSlice,
@@ -16,6 +17,7 @@ const store = configureStore({
     authenticationSlice,
     OTPSlice,
     userSlice,
+    companySlice,
   },
 });
 

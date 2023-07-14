@@ -1,10 +1,11 @@
-import { theme as themeToken, Avatar } from "antd";
+import { theme as themeToken, Avatar, Skeleton } from "antd";
 import { useEffect } from "react";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../core/hooks/redux-hooks";
 import { getMe } from "../../slice/userSlice";
+import { getFirstName, getLastName } from "../../../kirayAdminApp/utils/consts";
 
 type Props = {
   type?: "welcome" | "avatar";
@@ -17,9 +18,8 @@ const Profile = ({ type = "avatar" }: Props) => {
 
   // Find first letters of full name to
   // display if there is no profile image
-  const fullName = full_name.split(" ");
-  const firstName = fullName[0];
-  const lastName = fullName[1];
+  const firstName = getFirstName(full_name);
+  const lastName = getLastName(full_name);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,7 +27,14 @@ const Profile = ({ type = "avatar" }: Props) => {
   }, []);
 
   if (loading) {
-    return <span>Loading...</span>;
+    return type === "avatar" ? (
+      <div className="flex flex-col items-center justify-center w-full p-5">
+        <Skeleton.Avatar active className="mb-5" />
+        <Skeleton.Input active />
+      </div>
+    ) : (
+      <Skeleton.Input />
+    );
   }
 
   return (
