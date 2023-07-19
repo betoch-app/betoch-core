@@ -15,10 +15,10 @@ const Logo = ({ firstWordColor, secondWordColor, className }: Props) => {
   return (
     <div className="logo-container" onClick={() => goToHome()}>
       <span style={{ color: firstWordColor }} className={className}>
-        <FormattedMessage id="logo.titles.kiray" defaultMessage={"Kiray"} />
+        <FormattedMessage id="logo.titles.kifiya" defaultMessage={"Kifiya"} />
       </span>
       <span style={{ color: secondWordColor }} className={className}>
-        <FormattedMessage id="logo.titles.kifiya" defaultMessage={"Kifiya"} />
+        <FormattedMessage id="logo.titles.net" defaultMessage={"Net"} />
       </span>
     </div>
   );

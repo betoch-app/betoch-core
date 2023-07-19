@@ -1,6 +1,6 @@
 {
   "en-US": {
-    "logo.titles.kiray": "Kiray",
+    "logo.titles.net": "Net",
     "logo.titles.kifiya":"kifiya",
     "authentication.signin.title":"Sign into Kiray Kifiya",
     "authentication.signin.phoneLabel":"Phone number",
@@ -38,7 +38,7 @@
   },
 
   "am-ET": {
-    "logo.titles.kiray": "ክራይ",
+    "logo.titles.net": "ኔት",
     "logo.titles.kifiya":"ክፍያ",
     "authentication.signin.title":"ወደ ክራይ ክፍያ አካውንትዎ ይግቡ",
     "authentication.signin.phoneLabel":"ስልክ ቁጥር",

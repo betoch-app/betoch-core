@@ -8,6 +8,7 @@ import { getFirstName, getGreeting } from "../../utils/consts";
 import { useEffect, useState } from "react";
 import { registerCompany } from "../../slice/companySlice";
 import { useNavigate } from "react-router-dom";
+import { addNewCompany } from "../../../common/slice/userSlice";
 
 const CompanyRegistrationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -17,16 +18,19 @@ const CompanyRegistrationPage = () => {
   const { full_name } = data;
 
   const { success } = useAppSelector((state) => state.companySlice);
+  const [formData, setFormData] = useState(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (success) {
       navigate("/");
+      dispatch(addNewCompany(formData));
     }
   }, [success]);
 
   const onCompanyRegistration = (values: any) => {
+    setFormData(values);
     setLoading(true);
     dispatch(registerCompany(values));
   };

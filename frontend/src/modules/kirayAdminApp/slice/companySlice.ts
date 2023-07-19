@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
+import { ICompany } from "../../common/model/ICompany";
 
 const initialState = {
   loading: true,

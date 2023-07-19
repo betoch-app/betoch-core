@@ -1,3 +1,5 @@
+import { IPayment } from "../models/IPayment";
+
 export const getFirstName = (full_name: string) => {
   if (full_name.includes(" ")) {
     const fullName = full_name.split(" ");
@@ -26,3 +28,26 @@ export const getGreeting = () => {
     return "Good evening";
   }
 };
+
+export const payments: IPayment[] = [
+  {
+    id: 1,
+    title: "New Payment",
+    color: "green",
+  },
+  {
+    id: 2,
+    title: "This week payment",
+    color: "red",
+  },
+  {
+    id: 3,
+    title: "This month payment",
+    color: "blue",
+  },
+  {
+    id: 4,
+    title: "Remaining payment",
+    color: "yellow",
+  },
+];
