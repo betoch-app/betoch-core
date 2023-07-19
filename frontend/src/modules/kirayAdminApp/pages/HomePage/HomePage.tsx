@@ -9,7 +9,7 @@ import ModalHOC from "../../../common/HOC/ModalHOC/ModalHOC";
 import { useEffect, useState } from "react";
 import CompanyRegistration from "../../components/CompanyRegistration/CompanyRegistration";
 import { payments } from "../../utils/consts";
-import { addNewCompany } from "../../../common/slice/userSlice";
+import { addNewCompany, getMe } from "../../../common/slice/userSlice";
 import { registerCompany } from "../../slice/companySlice";
 
 const HomePage = () => {
@@ -32,7 +32,7 @@ const HomePage = () => {
   useEffect(() => {
     if (data.company.length > 0) {
       setSelectedHouse({
-        value: 2,
+        value: company[0].id,
         label: company[0].company_name,
         title: company[0].company_name,
       });
@@ -41,7 +41,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (success) {
-      dispatch(addNewCompany(newHouseFormData));
+      dispatch(getMe());
       setIsModalVisible(false);
     }
   }, [success]);
