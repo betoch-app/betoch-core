@@ -15,7 +15,7 @@ const DashboardHOC = ({ sideBarMenus, header, children }: Props) => {
         <DashboardHeader headerComponent={header} />
       </div>
 
-      <div className="flex flex-row w-full w-full main-container fixed">
+      <div className="flex flex-row w-full main-container fixed">
         <div>
           <DashboardSideBar menus={sideBarMenus} />
         </div>

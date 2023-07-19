@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IUserResponse } from "./interfaces/interfaces";
 import { httpService } from "../../core/services/https.service";
 import { BASE_URL } from "../../core/utils/consts";
+import { ICompany } from "../model/ICompany";
 
 const initialState: IUserResponse = {
   loading: true,
@@ -26,6 +27,11 @@ const userSlice = createSlice({
     updateState(state) {
       state.loading = false;
     },
+
+    addNewCompany: (state, action: PayloadAction<ICompany>) => {
+      const newCompany = action.payload;
+      state.data.company = [...state.data.company, newCompany];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -48,4 +54,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { addNewCompany } = userSlice.actions;
 export default userSlice.reducer;
